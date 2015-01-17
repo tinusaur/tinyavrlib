@@ -3,6 +3,11 @@ CHANGES
 
 2015-01-17 (nb)
 
+Added licensing and version information.
+
+
+2015-01-17 (nb)
+
 Files added to the repository.
 
 
