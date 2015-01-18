@@ -6,13 +6,14 @@ TinyAVRLib - Library of commonly used function for tinyAVR microcontrollers.
  Please, as a favour, retain the link http://tinusaur.org to The Tinusaur Project.
 -----------------------------------------------------------------------------------
 
-TinyAVRLib is written in plain C and does not require any additional libraries to function except those that come with the WinAVR SDK.
+TinyAVRLib is written in plain C and, for the most part, does not require additional libraries except those that come with the platform SDK.
+
 
 ==== Links ====
 
 Official Tinusaur Project website: http://tinusaur.org
-Project SSD1306xLED page: http://tinusaur.org/projects/tinyavrlib/
-Project SSD1306xLED Source code: https://bitbucket.org/tinusaur/tinyavrlib
+Project TinyAVRLib page: http://tinusaur.org/projects/tinyavrlib/
+Project TinyAVRLib Source code: https://bitbucket.org/tinusaur/tinyavrlib
 
 Twitter: https://twitter.com/tinusaur
 Facebook: https://www.facebook.com/tinusaur
