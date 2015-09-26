@@ -13,7 +13,7 @@ TinyAVRLib is written in plain C and, for the most part, does not require additi
 
 Official Tinusaur Project website: http://tinusaur.org
 Project TinyAVRLib page: http://tinusaur.org/projects/tinyavrlib/
-Project TinyAVRLib Source code: https://bitbucket.org/tinusaur/tinyavrlib
+Project TinyAVRLib source code: https://bitbucket.org/tinusaur/tinyavrlib
 
 Twitter: https://twitter.com/tinusaur
 Facebook: https://www.facebook.com/tinusaur

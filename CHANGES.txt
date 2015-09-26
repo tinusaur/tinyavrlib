@@ -1,6 +1,14 @@
 CHANGES
 
 
+2015-09-26 (nb)
+
+Added new BUFFIO library to handle cyclic buffered input/output..
+
+- Added new BUFFIO library to handle cyclic buffered input/output..
+- Edited text files.
+
+
 2015-01-17 (nb)
 
 Added licensing and version information.
