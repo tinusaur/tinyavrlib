@@ -1,21 +1,21 @@
-/*
+/**
  * NUM2STR - Functions to handle the conversion of numeric vales to strings.
  *
  * @created	2014-12-18
  * @author	Neven Boyanov
- * @version	Last Modified 2015-01-17
+ * @version	2016-04-17 (last modified)
  *
- * This is part of the TinyAVRLib project.
+ * This is part of the Tinusaur/TinyAVRLib project.
  *
  * Copyright (c) 2015 Neven Boyanov, Tinusaur Team. All Rights Reserved.
  * Distributed as open source software under MIT License, see LICENSE.txt file.
- * Please, as a favour, retain the link http://tinusaur.org to The Tinusaur Project.
+ * Please, as a favor, retain the link http://tinusaur.org to The Tinusaur Project.
  *
  * Source code available at: https://bitbucket.org/tinusaur/tinyavrlib
  *
  */
 
-// ----------------------------------------------------------------------------
+// ============================================================================
 
 #include "num2str.h"
 
@@ -24,7 +24,7 @@
 // NOTE: This implementation is borrowed from the LCDDDD library.
 // Original source code at: https://bitbucket.org/boyanov/avr/src/default/lcdddd/src/lcdddd/lcdddd.h
 
-uint8_t usint2decascii(uint16_t num, char* buffer)
+uint8_t usint2decascii(uint16_t num, char *buffer)
 {
 	const unsigned short powers[] = { 10000u, 1000u, 100u, 10u, 1u }; // The "const unsigned short" combination gives shortest code.
 	char digit; // "digit" is stored in a char array, so it should be of type char.
@@ -69,12 +69,12 @@ uint8_t usint2decascii(uint16_t num, char* buffer)
 			}
 		}
 		buffer[pos] = digit + '0';	// Convert to ASCII
-		
+
 	}
-	
+
 	// NOTE: The resulting ascii text should not be terminated with '\0' here.
 	//       The provided buffer maybe part of a larger text in both directions.
-	
+
 	return digits;
 }
 

@@ -1,24 +1,25 @@
-/*
+/**
  * BUFFIO - Functions to handle cyclic buffered input/output.
  *
  * @created	2015-04-18
  * @author	Neven Boyanov
+ * @version	2016-04-22 (last modified)
  *
- * This is part of the TinyAVRLib project.
+ * This is part of the Tinusaur/TinyAVRLib project.
  *
  * Copyright (c) 2015 Neven Boyanov, Tinusaur Team. All Rights Reserved.
  * Distributed as open source software under MIT License, see LICENSE.txt file.
- * Please, as a favour, retain the link http://tinusaur.org to The Tinusaur Project.
+ * Please, as a favor, retain the link http://tinusaur.org to The Tinusaur Project.
  *
  * Source code available at: https://bitbucket.org/tinusaur/tinyavrlib
  *
  */
 
-// ----------------------------------------------------------------------------
+// ============================================================================
 
 #include "buffio.h"
 
-// ============================================================================
+// ----------------------------------------------------------------------------
 
 // #include <stdio.h>
 // #define DEBUGGING_PRINT_CHAR(ch) putchar(ch)
@@ -118,4 +119,4 @@ int8_t buffio_receive_until2(char *kw1, char *kw2)
     }
 }
 
-// ----------------------------------------------------------------------------
+// ============================================================================

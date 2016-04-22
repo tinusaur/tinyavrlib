@@ -3,7 +3,7 @@ TinyAVRLib - Library of commonly used function for tinyAVR microcontrollers.
 -----------------------------------------------------------------------------------
  Copyright (c) 2015 Neven Boyanov, Tinusaur Team. All Rights Reserved.
  Distributed as open source software under MIT License, see LICENSE.txt file.
- Please, as a favour, retain the link http://tinusaur.org to The Tinusaur Project.
+ Please, as a favor, retain the link http://tinusaur.org to The Tinusaur Project.
 -----------------------------------------------------------------------------------
 
 TinyAVRLib is written in plain C and, for the most part, does not require additional libraries except those that come with the platform SDK.
