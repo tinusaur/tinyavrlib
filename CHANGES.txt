@@ -3,6 +3,8 @@ CHANGES
 
 2016-04-22 (nb)
 
+Added new usint2binascii() function to convert numbers to binary. 
+
 Fixed types, improved texts, formatting, etc.
 
 

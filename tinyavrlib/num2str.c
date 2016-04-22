@@ -80,3 +80,35 @@ uint8_t usint2decascii(uint16_t num, char *buffer)
 
 // ----------------------------------------------------------------------------
 
+// NOTE: The buffer should be always at least MAX_DIGITS in length - the function works with 16-bit numbers.
+
+uint8_t usint2binascii(uint16_t num, char *buffer) {
+	uint16_t power = 0x8000;	// This is the 1000 0000 0000 0000 binary number.
+	char digit; // "digit" is stored in a char array, so it should be of type char.
+	uint8_t digits = USINT2BINASCII_MAX_DIGITS - 1;
+	for (uint8_t pos = 0; pos < USINT2BINASCII_MAX_DIGITS; pos++) { // "pos" is index in an array.
+		digit = 0;
+		if (num >= power) {
+			digit++;
+			num -= power;
+		}
+		// Fixed width, space ('0', or anything else) padded result, digits offset.
+		// Note: Determines the offset of the first significant digit.
+		// Note: Could be used for variable width, not padded, left aligned result.
+		if (digits == USINT2BINASCII_MAX_DIGITS - 1) {
+			if (digit == 0) {
+				if (pos < USINT2BINASCII_MAX_DIGITS - 1) // Check position, so single "0" will be handled properly.
+					digit = 0; // Use: "-16" for space (' '), "-3" for dash/minus ('-'), "0" for zero ('0'), etc.
+			} else {
+				digits = pos;
+			}
+		}
+		buffer[pos] = digit + '0';	// Convert to ASCII
+		power = power >> 1;
+	}
+	// NOTE: The resulting ascii text should not be terminated with '\0' here.
+	//       The provided buffer maybe part of a larger text in both directions.
+	return digits;
+}
+
+// ============================================================================
