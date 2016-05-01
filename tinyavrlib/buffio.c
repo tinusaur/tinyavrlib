@@ -7,7 +7,7 @@
  *
  * This is part of the Tinusaur/TinyAVRLib project.
  *
- * Copyright (c) 2015 Neven Boyanov, Tinusaur Team. All Rights Reserved.
+ * Copyright (c) 2016 Neven Boyanov, Tinusaur Team. All Rights Reserved.
  * Distributed as open source software under MIT License, see LICENSE.txt file.
  * Please, as a favor, retain the link http://tinusaur.org to The Tinusaur Project.
  *
