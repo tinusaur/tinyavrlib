@@ -1,6 +1,11 @@
 CHANGES
 
 
+2015-05-15 (nb)
+
+Scheduler moved to the TinyAVRLib project.
+
+
 2016-04-22 (nb)
 
 Added new cpufreq.h file with code to set CPU frequency programmatically.
