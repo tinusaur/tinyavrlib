@@ -54,14 +54,13 @@ void scheduler_start(void) {
     TCCR0B |= __scheduler_tccr0b;
 }
 
-static uint32_t __scheduler_tick = 0;
-
 // Define interrupt vector
 ISR(TIMER0_COMPA_vect)
 {
-	(*__scheduler_userfunc)(__scheduler_tick);
+	static uint32_t __scheduler_tick;
+	(*__scheduler_userfunc)(__scheduler_tick++);
+	// IMPORTANT: It is not guaranteed that the "increment" operation will be atomic.
    	// Note: No need to clear flags in TIFR - done automatically
-	__scheduler_tick++;
 }
 
 // ============================================================================

@@ -46,9 +46,9 @@
 #define SCHEDULER_TCCR0B_XT0F	(1 << CS02) | (1 << CS01) | (0 << CS00)	// External clock source on T0 pin. Clock on falling edge.
 #define SCHEDULER_TCCR0B_XT0R	(1 << CS02) | (1 << CS01) | (1 << CS00)	// External clock source on T0 pin. Clock on rising edge.
 
-#define SCHEDULER_OCR0A_MIN			9	// Reasonable minimum, roughly 100 ticks/sec. at 1 MHz CPU clock.
-#define SCHEDULER_OCR0A_DEFAULT		97	// Default, gives about 10 ticks per second at 1 MHz CPU clock.
-#define SCHEDULER_OCR0A_MAX			255	// Absolute maximum, roughly 4 ticks/sec. at 1 MHz CPU clock.
+#define SCHEDULER_OCR0A_MIN			9	// Reasonable minimum, roughly 100 ticks/sec. at 1 MHz CPU clock and 1024 pre-scale.
+#define SCHEDULER_OCR0A_DEFAULT		97	// Default, gives about 10 ticks per second at 1 MHz CPU clock and 1024 pre-scale.
+#define SCHEDULER_OCR0A_MAX			255	// Absolute maximum, roughly 4 ticks/sec. at 1 MHz CPU clock and 1024 pre-scale.
 
 #define SCHEDULER_TCCR0B			SCHEDULER_TCCR0B_1024
 #define SCHEDULER_OCR0A				SCHEDULER_OCR0A_DEFAULT
@@ -57,7 +57,7 @@
 
 typedef void (*scheduler_userfunc_p)(uint32_t tick);
 
-// /*EXAMPLE*/ void scheduler_userfunc(uint32_t);
+// EXAMPLE: void my_scheduler_userfunc(uint32_t);
 
 // ----------------------------------------------------------------------------
 
