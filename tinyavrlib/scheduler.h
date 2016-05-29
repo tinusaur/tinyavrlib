@@ -55,14 +55,32 @@
 
 // ----------------------------------------------------------------------------
 
+typedef struct {
+	uint32_t tick;
+} scheduler_status;
+// NOTE: This structure may be extended in the future.
+
+typedef scheduler_status * scheduler_status_p;
+
 typedef void (*scheduler_userfunc_p)(uint32_t tick);
 
-// EXAMPLE: void my_scheduler_userfunc(uint32_t);
+// EXAMPLE: void my_scheduler_userfunc(uint32_t tick);
+
+typedef void (*scheduler_usertask_p)(scheduler_status_p scheduler);
+
+// EXAMPLE: void my_scheduler_usertask(scheduler_status_p scheduler);
+
+typedef union {
+	scheduler_userfunc_p userfunc;
+	scheduler_usertask_p usertask;
+	void (*userproc)(void);
+} scheduler_userproc;
 
 // ----------------------------------------------------------------------------
 
 void scheduler_init(scheduler_userfunc_p);
 void scheduler_reinit(uint8_t, uint8_t);
+void scheduler_usertask(scheduler_usertask_p usertask, uint8_t counter);
 void scheduler_start(void);
 
 // ----------------------------------------------------------------------------

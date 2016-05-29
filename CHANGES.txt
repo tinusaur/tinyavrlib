@@ -1,6 +1,15 @@
 CHANGES
 
 
+2015-05-29 (nb)
+
+Implemented scheduling of up to 3 addition user-defined tasks. Improved extensibility.
+
+- New scheduler_usertask function to add up to 3 user defined tasks.
+- The __scheduler_tick variable replaced by the __scheduler_status for extensibility.
+- Reimplemented the TIMER0_COMPA_vect interrupt vector to invoke the user-defined tasks.
+
+
 2015-05-24 (nb)
 
 Simple optimization for __scheduler_tick - local and static.
