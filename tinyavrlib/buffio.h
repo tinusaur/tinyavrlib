@@ -30,8 +30,9 @@
 //    8/0b00000111
 //   16/0b00001111
 //   32/0b00011111
-#define BUFFIO_DATA_SIZE    16
-#define BUFFIO_DATA_MASK    0b00001111
+//   64/0b00111111
+#define BUFFIO_DATA_SIZE    64
+#define BUFFIO_DATA_MASK    0b00111111
 
 // ----------------------------------------------------------------------------
 
@@ -44,7 +45,7 @@ uint8_t buffio_ids_receive(void);
 
 void buffio_init(void);
 void buffio_reset(void);
-void buffio_put(char ch);
+char buffio_put(char ch);
 char buffio_get(void);
 int buffio_has_more(void);
 int8_t buffio_skip_until(char *kw);

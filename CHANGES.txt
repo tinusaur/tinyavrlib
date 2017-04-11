@@ -1,6 +1,16 @@
 CHANGES
 
 
+2017-04-11 (nb)
+
+The buffio_put function now returns char. Source code maintenance and optimization.
+
+- Default buffer size increased to more a practical 64 bytes.
+- The buffio_put function now returns char - its argument, leads to more optimized calls in conjunction with buffio_ids_receive.
+- Updated open/close bracket style.
+- Updated source code comments. Updated dates and other texts.
+
+
 2015-05-29 (nb)
 
 Added testing scripts for the new Scheduler functionality.
