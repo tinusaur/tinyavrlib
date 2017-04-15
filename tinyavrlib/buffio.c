@@ -27,9 +27,10 @@
 
 // ----------------------------------------------------------------------------
 
-int8_t buffio_head = 0;
-int8_t buffio_tail = 0;
-char buffio_data[BUFFIO_DATA_SIZE];
+static int8_t buffio_head = 0;
+static int8_t buffio_tail = 0;
+static char *buffio_kwd_crlf = "\r\n";
+static char buffio_data[BUFFIO_DATA_SIZE];
 
 // ----------------------------------------------------------------------------
 
@@ -68,20 +69,20 @@ int buffio_has_more() { return BUFFIO_HAS_MORE(); }
 
 // ----------------------------------------------------------------------------
 
-int8_t buffio_skip_until(char *kw) {
+void buffio_skip_until(char *kw) {
     char *kwp = kw;
 	for (;;) {
         uint8_t ch = buffio_ids_receive();	// Receive 1 byte of data. (This may wait for the data to come)
-        // DEBUGGING_PRINT_CHAR(ch);
 		// Note: Received data is not stored.
+        // DEBUGGING_PRINT_CHAR(ch);
+		// Check for the keyword.
         if (*kwp != ch) kwp = kw;
         if (*kwp == ch) kwp++;
-        if (*kwp == '\0') return 1;
-        // if (!buffio_ids_has_more()) return -1;
+        if (*kwp == '\0') return;
     }
 }
 
-int8_t buffio_receive_until(char *kw) {
+void buffio_receive_until(char *kw) {
     char *kwp = kw;
 	for (;;) {
 		uint8_t ch = buffio_put(buffio_ids_receive());	// Receive and store 1 byte of data.
@@ -89,9 +90,13 @@ int8_t buffio_receive_until(char *kw) {
 		// Check for the keyword.
 		if (*kwp != ch) kwp = kw;
 		if (*kwp == ch) kwp++;
-		if (*kwp == '\0') return 1;
-		// if (!buffio_ids_has_more()) return -1;
+		if (*kwp == '\0') return;
     }
+}
+
+void buffio_receive_untilln(char *kwd) {
+	buffio_receive_until(kwd);	// Receiving until a keyword is found.
+	buffio_receive_until(buffio_kwd_crlf);	// Receiving until a CR/LF is found.
 }
 
 int8_t buffio_receive_until2(char *kw1, char *kw2) {
@@ -109,8 +114,13 @@ int8_t buffio_receive_until2(char *kw1, char *kw2) {
 		if (*kw2p != ch) kw2p = kw2;
 		if (*kw2p == ch) kw2p++;
 		if (*kw2p == '\0') return 2;
-		// if (!buffio_ids_has_more()) return -1;
     }
+}
+
+int8_t buffio_receive_until2ln(char *kw1, char *kw2) {
+	int8_t result = buffio_receive_until2(kw1, kw2);	// Receiving until a keyword is found.
+	buffio_receive_until(buffio_kwd_crlf);	// Receiving until a CR/LF is found.
+	return result;
 }
 
 // ============================================================================

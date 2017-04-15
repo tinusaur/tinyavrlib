@@ -1,6 +1,16 @@
 CHANGES
 
 
+2017-04-15 (nb)
+
+IMPORTNAT: Functions buffio_skip_until, buffio_receive_until do not return result. New functions buffio_receive_untilln, buffio_receive_until2ln.
+
+- Functions buffio_skip_until, buffio_receive_until do not return result.
+- New functions buffio_receive_untilln, buffio_receive_until2ln.
+- Some code optimizations.
+- Improved source code comments.
+
+
 2017-04-11 (nb)
 
 The buffio_put function now returns char. Source code maintenance and optimization.

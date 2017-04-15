@@ -45,12 +45,14 @@ uint8_t buffio_ids_receive(void);
 
 void buffio_init(void);
 void buffio_reset(void);
-char buffio_put(char ch);
+char buffio_put(char);
 char buffio_get(void);
 int buffio_has_more(void);
-int8_t buffio_skip_until(char *kw);
-int8_t buffio_receive_until(char *kw);
-int8_t buffio_receive_until2(char *kw1, char *kw2);
+void buffio_skip_until(char *);
+void buffio_receive_until(char *);
+void buffio_receive_untilln(char *);
+int8_t buffio_receive_until2(char *, char *);
+int8_t buffio_receive_until2ln(char *, char *);
 
 // ----------------------------------------------------------------------------
 
