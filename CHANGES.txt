@@ -3,6 +3,11 @@ CHANGES
 
 2017-07-23 (nb)
 
+Added new soundlib module to the library.
+
+
+2017-07-23 (nb)
+
 Added new TODO file. Updated text files.
 
 
