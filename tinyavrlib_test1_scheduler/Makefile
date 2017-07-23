@@ -6,9 +6,9 @@
 #
 # This is part of the Tinusaur/TinyAVRLib project.
 #
-# Copyright (c) 2016 Neven Boyanov, Tinusaur Team. All Rights Reserved.
+# Copyright (c) 2017 Neven Boyanov, Tinusaur Team. All Rights Reserved.
 # Distributed as open source software under MIT License, see LICENSE.txt file.
-# Please, as a favor, retain the link http://tinusaur.org to The Tinusaur Project.
+# Retain in your source code the link http://tinusaur.org to the Tinusaur project.
 #
 # Source code available at: https://bitbucket.org/tinusaur/tinyavrlib
 #
@@ -33,7 +33,7 @@
 #
 # Hey Emacs, this is a -*- makefile -*-
 #----------------------------------------------------------------------------
-# WinAVR Makefile Template written by Eric B. Weddington, Jörg Wunsch, et al.
+# WinAVR Makefile Template written by Eric B. Weddington, Jorg Wunsch, et al.
 #
 # Released to the Public Domain
 #

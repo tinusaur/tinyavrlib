@@ -1,6 +1,11 @@
 CHANGES
 
 
+2017-07-23 (nb)
+
+Updated some texts in the source code files.
+
+
 2017-04-15 (nb)
 
 IMPORTNAT: Functions buffio_skip_until, buffio_receive_until do not return result. New functions buffio_receive_untilln, buffio_receive_until2ln.

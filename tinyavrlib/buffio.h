@@ -1,9 +1,8 @@
 /**
  * BUFFIO - Functions to handle cyclic buffered input/output.
  *
- * @created	2015-04-18
- * @author	Neven Boyanov
- * @version	2016-04-22 (last modified)
+ * @created 2015-04-18
+ * @author Neven Boyanov
  *
  * This is part of the Tinusaur/TinyAVRLib project.
  *
@@ -27,12 +26,12 @@
 // ----------------------------------------------------------------------------
 
 // Data SIZE/MASK:
-//    8/0b00000111
-//   16/0b00001111
-//   32/0b00011111
-//   64/0b00111111
-#define BUFFIO_DATA_SIZE    64
-#define BUFFIO_DATA_MASK    0b00111111
+//	  8/0b00000111
+//	 16/0b00001111
+//	 32/0b00011111
+//	 64/0b00111111
+#define BUFFIO_DATA_SIZE	64
+#define BUFFIO_DATA_MASK	0b00111111
 
 // ----------------------------------------------------------------------------
 

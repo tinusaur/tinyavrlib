@@ -1,9 +1,8 @@
 /**
  * BUFFIO - Functions to handle cyclic buffered input/output.
  *
- * @created	2015-04-18
- * @author	Neven Boyanov
- * @version	2016-04-22 (last modified)
+ * @created 2015-04-18
+ * @author Neven Boyanov
  *
  * This is part of the Tinusaur/TinyAVRLib project.
  *
@@ -38,30 +37,30 @@ void buffio_init(void) {
 	buffio_reset();
 	
 	// This is not necessary, at all. Should be removed.
-    // for (int i = 0; i < sizeof (buffio_data); i++) buffio_data[i] = 0;
+	// for (int i = 0; i < sizeof (buffio_data); i++) buffio_data[i] = 0;
 }
 
 void buffio_reset(void) {
-    buffio_head = buffio_tail = 0;  // This isn't really necessary except in some specific cases.
+	buffio_head = buffio_tail = 0;	// This isn't really necessary except in some specific cases.
 }
 
 char buffio_put(char ch) {
-    buffio_data[buffio_head & BUFFIO_DATA_MASK] = ch;
-    buffio_head++;
+	buffio_data[buffio_head & BUFFIO_DATA_MASK] = ch;
+	buffio_head++;
 	return ch;
 }
 
 char buffio_get() {
-    if (buffio_head - buffio_tail > BUFFIO_DATA_MASK)     {
-        buffio_tail = buffio_head - BUFFIO_DATA_MASK - 1;
-    }
-    char ch = buffio_data[buffio_tail & BUFFIO_DATA_MASK];
-    buffio_tail++;
-    return ch;
+	if (buffio_head - buffio_tail > BUFFIO_DATA_MASK)	  {
+		buffio_tail = buffio_head - BUFFIO_DATA_MASK - 1;
+	}
+	char ch = buffio_data[buffio_tail & BUFFIO_DATA_MASK];
+	buffio_tail++;
+	return ch;
 }
 
 /* char buffio_read() {
-    return buffio_data[buffio_tail & BUFFIO_DATA_MASK];
+	return buffio_data[buffio_tail & BUFFIO_DATA_MASK];
 } */
 
 #define BUFFIO_HAS_MORE() (buffio_head != buffio_tail)
@@ -70,20 +69,20 @@ int buffio_has_more() { return BUFFIO_HAS_MORE(); }
 // ----------------------------------------------------------------------------
 
 void buffio_skip_until(char *kw) {
-    char *kwp = kw;
+	char *kwp = kw;
 	for (;;) {
-        uint8_t ch = buffio_ids_receive();	// Receive 1 byte of data. (This may wait for the data to come)
+		uint8_t ch = buffio_ids_receive();	// Receive 1 byte of data. (This may wait for the data to come)
 		// Note: Received data is not stored.
-        // DEBUGGING_PRINT_CHAR(ch);
+		// DEBUGGING_PRINT_CHAR(ch);
 		// Check for the keyword.
-        if (*kwp != ch) kwp = kw;
-        if (*kwp == ch) kwp++;
-        if (*kwp == '\0') return;
-    }
+		if (*kwp != ch) kwp = kw;
+		if (*kwp == ch) kwp++;
+		if (*kwp == '\0') return;
+	}
 }
 
 void buffio_receive_until(char *kw) {
-    char *kwp = kw;
+	char *kwp = kw;
 	for (;;) {
 		uint8_t ch = buffio_put(buffio_ids_receive());	// Receive and store 1 byte of data.
 		// DEBUGGING_PRINT_CHAR(ch);
@@ -91,7 +90,7 @@ void buffio_receive_until(char *kw) {
 		if (*kwp != ch) kwp = kw;
 		if (*kwp == ch) kwp++;
 		if (*kwp == '\0') return;
-    }
+	}
 }
 
 void buffio_receive_untilln(char *kwd) {
@@ -100,8 +99,8 @@ void buffio_receive_untilln(char *kwd) {
 }
 
 int8_t buffio_receive_until2(char *kw1, char *kw2) {
-    char *kw1p = kw1;
-    char *kw2p = kw2;
+	char *kw1p = kw1;
+	char *kw2p = kw2;
 	for (;;) {
 		uint8_t ch = buffio_put(buffio_ids_receive());	// Receive and store 1 byte of data.
 		// NOTE: This may wait for the data to come)
@@ -114,7 +113,7 @@ int8_t buffio_receive_until2(char *kw1, char *kw2) {
 		if (*kw2p != ch) kw2p = kw2;
 		if (*kw2p == ch) kw2p++;
 		if (*kw2p == '\0') return 2;
-    }
+	}
 }
 
 int8_t buffio_receive_until2ln(char *kw1, char *kw2) {
