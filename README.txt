@@ -6,8 +6,10 @@ TinyAVRLib - Library of commonly used function for tinyAVR microcontrollers.
  Retain in your source code the link http://tinusaur.org to the Tinusaur project.
 -----------------------------------------------------------------------------------
 
-TinyAVRLib is written in plain C and, for the most part, does not require additional libraries except those that come with the platform SDK.
+Folders and modules:
+- tinyavrlib	- Library
 
+This was developed for and tested on the ATtiny85 microcontroller.
 
 ==== Links ====
 

@@ -1,0 +1,9 @@
+TODO
+
+
+2017-07
+
+- Add testing scripts for the soundlib library.
+
+- (done) Start using source code repository.
+
