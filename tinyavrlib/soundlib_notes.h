@@ -1,16 +1,16 @@
 /**
- * The Shield-EDU4xIO Project
+ * Soundlib - Library for playing sounds, the TinyAVRLib Project.
  *
- * @created	2015-09-22
+ * @created 2017-07-14
  * @author Neven Boyanov
  *
- * This is part of the Tinusaur/Shield-EDU4xIO project.
+ * This is part of the Tinusaur/TinyAVRLib project.
  *
- * Copyright (c) 2017 Neven Boyanov, Tinusaur Team. All Rights Reserved.
+ * Copyright (c) 2017 Neven Boyanov, The Tinusaur Team. All Rights Reserved.
  * Distributed as open source software under MIT License, see LICENSE.txt file.
  * Retain in your source code the link http://tinusaur.org to the Tinusaur project.
  *
- * Source code available at: https://bitbucket.org/tinusaur/shield-edu4xio
+ * Source code available at: https://bitbucket.org/tinusaur/tinyavrlib
  *
  */
 
