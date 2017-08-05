@@ -53,6 +53,8 @@
 #define SCHEDULER_TCCR0B			SCHEDULER_TCCR0B_1024
 #define SCHEDULER_OCR0A				SCHEDULER_OCR0A_DEFAULT
 
+#define SCHEDULER_USERFUNC_NULL		((scheduler_userfunc_p)0)
+
 // ----------------------------------------------------------------------------
 
 typedef struct {

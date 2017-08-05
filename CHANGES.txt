@@ -1,7 +1,18 @@
 CHANGES
 
 
-2017-07-24 (nb)
+2017-08-05 (nb)
+
+Bugfix: removed "break" in TIMER0_COMPA_vect loop. Added SCHEDULER_USERFUNC_NULL definition for "no user function" cases.
+
+- Bugfix: removed "break" in TIMER0_COMPA_vect loop that caused non-execution under certain circumstances.
+- Added SCHEDULER_USERFUNC_NULL definition for "no user function" cases.
+- Some variable renamed for better readability.
+- Added more text and comments.
+- Removed old and unused code.
+
+
+2017-07-30 (nb)
 
 Updated some texts.
 

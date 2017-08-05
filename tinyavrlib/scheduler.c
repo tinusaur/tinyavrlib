@@ -26,7 +26,7 @@
 
 static scheduler_userproc __scheduler_userprocs[4];
 static uint8_t __scheduler_counters[4];
-static uint8_t __scheduler_currents[4];
+static uint8_t __scheduler_countdowns[4];
 
 // TODO: Add list of user functions.
 // TODO: Implement scheduler_add that adds user function to the list.
@@ -46,12 +46,17 @@ void scheduler_reinit(uint8_t new_tccr0b, uint8_t new_ocr0a) {
 	__scheduler_tccr0b = new_tccr0b;
 	__scheduler_ocr0a = new_ocr0a;
 }
+
+// Add a User Task to list of scheduled tasks, up to 3 tasks.
+// The counter is variable that will be decremented on each 
+// system scheduler tick, when 0 the task will be executed.
+// TODO: Return error code if the number of maximum task exceeded.
 void scheduler_usertask(scheduler_usertask_p usertask, uint8_t counter) {
 	static uint8_t i;
 	if (++i >= 4) return;
 	__scheduler_userprocs[i].usertask = usertask;
 	__scheduler_counters[i] = counter;
-	__scheduler_currents[i] = counter;
+	__scheduler_countdowns[i] = counter;
 }
 
 void scheduler_start(void) {
@@ -64,28 +69,22 @@ void scheduler_start(void) {
 }
 
 // Define interrupt vector
-ISR(TIMER0_COMPA_vect)
-{
-	// static uint32_t __scheduler_tick;
+ISR(TIMER0_COMPA_vect) {
 	static scheduler_status __scheduler_status;
 	for (uint8_t i = 0; i < 4; i++) {
 		if (__scheduler_userprocs[i].userproc) {
-			if (__scheduler_currents[i] == 0) {
-				// (*__scheduler_userfuncs[i])(__scheduler_tick);
-				if (i == 0) {
+			if (__scheduler_countdowns[i] == 0) {
+				if (i == 0) { // Execute if this is Task 0
 					(*__scheduler_userprocs[i].userfunc)(__scheduler_status.tick);
-				} else {
+				} else { // Execute if this is Task 1, 2 or 3.
 					(*__scheduler_userprocs[i].usertask)(&__scheduler_status);
 				}
-				__scheduler_currents[i] = __scheduler_counters[i];
+				__scheduler_countdowns[i] = __scheduler_counters[i];
 			} else {
-				__scheduler_currents[i]--;
+				__scheduler_countdowns[i]--;
 			}
-		} else {
-			break;
-		}
+		} // ELSE: continue;
 	}
-	// __scheduler_tick++;
 	__scheduler_status.tick++;
 	// IMPORTANT: It is not guaranteed that the "increment" operation will be atomic.
    	// Note: No need to clear flags in TIFR - done automatically
