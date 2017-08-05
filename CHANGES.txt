@@ -3,6 +3,11 @@ CHANGES
 
 2017-08-05 (nb)
 
+Removed the lowest 2 notes to make room in the higher 5 bits of the values for additional functionality.
+
+
+2017-08-05 (nb)
+
 The soundlib_scheduler function now has uint8_t argument, aligned with the scheduler_usertask function.
 
 - The soundlib_scheduler function now has uint8_t argument, aligned with the scheduler_usertask function.

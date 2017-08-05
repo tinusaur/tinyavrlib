@@ -26,8 +26,8 @@
 // S - Sharp ♯
 // F - Flat ♭
 
-#define	NOTE_A0N	((8 << 8) | 142)
-#define	NOTE_A0S	((8 << 8) | 134)
+// #define	NOTE_A0N	((8 << 8) | 142)	// Do not use these notes so the higher 5 bits
+// #define	NOTE_A0S	((8 << 8) | 134)	// are available for other purposes, e.g. length.
 #define	NOTE_B0N	((7 << 8) | 253)
 #define	NOTE_C0N	((7 << 8) | 239)
 #define	NOTE_C0S	((7 << 8) | 225)
