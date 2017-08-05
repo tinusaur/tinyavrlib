@@ -33,6 +33,7 @@ int soundlib_melody_data_index;
 
 // ----------------------------------------------------------------------------
 
+// Task to be executed by the system scheduler.
 void soundlib_scheduler_task(scheduler_status_p);
 
 // ----------------------------------------------------------------------------
@@ -46,14 +47,15 @@ void soundlib_init(void) {
 		1 << COM1A1 | 1 << COM1A0;	// Comparator A Output Mode: Set the OC1A output line.
 }
 
-void soundlib_scheduler(int i) {
-	scheduler_usertask(soundlib_scheduler_task, i);
+// Init the system scheduler with the library task.
+void soundlib_scheduler(uint8_t counter) {
+	scheduler_usertask(soundlib_scheduler_task, counter);
 }
 
 void soundlib_tone_play(uint16_t tone, uint8_t volume) {
-	uint8_t sound_prescale = (tone >> 8) + 2;
+	uint8_t sound_prescale = (tone >> 8) + 2; // Cut the prescale part of the note - the higher bits.
 	TCCR1 = (TCCR1 & 0b11110000) | ((sound_prescale) & 0b00001111);
-	uint8_t sound_pitch = tone & 0xff;
+	uint8_t sound_pitch = tone & 0xff; // Mask the pitch part of the note - the lower bits.
 	OCR1C = sound_pitch;
 	uint8_t sound_volume = sound_pitch >> (8 - (volume & 7));	// 1...7 (7=lowest)
 	OCR1B = sound_volume;
@@ -79,6 +81,7 @@ void soundlib_melody_start(soundlib_melody_data_t *melody_data, int size) {
 	soundlib_melody_data_index = 0;
 }
 
+// Task to be executed by the system scheduler.
 void soundlib_scheduler_task(scheduler_status_p scheduler) {
 	if (soundlib_melody_data_p && ((*scheduler).tick & 0x0f) == 1) {
 		uint16_t melody_note = pgm_read_word(&soundlib_melody_data_p[soundlib_melody_data_index]);

@@ -3,6 +3,14 @@ CHANGES
 
 2017-08-05 (nb)
 
+The soundlib_scheduler function now has uint8_t argument, aligned with the scheduler_usertask function.
+
+- The soundlib_scheduler function now has uint8_t argument, aligned with the scheduler_usertask function.
+- Added more text and comments.
+
+
+2017-08-05 (nb)
+
 Bugfix: removed "break" in TIMER0_COMPA_vect loop. Added SCHEDULER_USERFUNC_NULL definition for "no user function" cases.
 
 - Bugfix: removed "break" in TIMER0_COMPA_vect loop that caused non-execution under certain circumstances.
