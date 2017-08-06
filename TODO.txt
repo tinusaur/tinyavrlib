@@ -1,6 +1,11 @@
 TODO
 
 
+2017-08
+
+- Rename testing scripts folders, consistent with other projects. Ex.: tinyavrlib_test1_scheduler, tinyavrlib_test2_scheduler.
+
+
 2017-07
 
 - Add testing scripts for the soundlib library.
