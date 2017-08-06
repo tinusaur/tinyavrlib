@@ -3,6 +3,18 @@ CHANGES
 
 2017-08-06 (nb)
 
+Soundlib library improvements. New notes length functionality. Bugfixes and other improvements.
+
+- Implemented functionality for taking notes length into account. New soundlib_note_len function.
+- New soundlib_melody_stop function.
+- Bugfixes and additional measures for more reliable code.
+- Some functions renamed for consistency and usability. Function arguments moved around and changed, usage simplified.
+- Port PB4 is initialized now withing the library.
+- Added more text and comments in te source code.
+
+
+2017-08-06 (nb)
+
 Updated "soundlib_notes.h" file with note lengths definitions.
 
 - Updated "soundlib_notes.h" file with note lengths definitions.

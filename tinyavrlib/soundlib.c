@@ -24,12 +24,14 @@
 
 #include "scheduler.h"
 #include "soundlib.h"
+#include "soundlib_notes.h"
 
 // ----------------------------------------------------------------------------
 
 soundlib_melody_data_t *soundlib_melody_data_p;
 int soundlib_melody_data_size;
 int soundlib_melody_data_index;
+uint8_t soundlib_melody_volume;
 
 // ----------------------------------------------------------------------------
 
@@ -39,6 +41,7 @@ void soundlib_scheduler_task(scheduler_status_p);
 // ----------------------------------------------------------------------------
 
 void soundlib_init(void) {
+	DDRB |= (1 << PB4); // Set the port as output.
 	// Configure counter/timer1 for fast PWM on PB4
 	GTCCR |= 
 		// 1 << PWM1B |	// (done in play/stop routine) Enable PWM mode based on comparator OCR1B in Timer/Counter1.
@@ -48,46 +51,83 @@ void soundlib_init(void) {
 }
 
 // Init the system scheduler with the library task.
-void soundlib_scheduler(uint8_t counter) {
-	scheduler_usertask(soundlib_scheduler_task, counter);
+// This is necessary to be called if any of the asynchronous mode functions are used.
+void soundlib_scheduler() {
+	scheduler_usertask(soundlib_scheduler_task, 1);
+	// Note: The second argument could be used to specify the tempo.
 }
 
-void soundlib_tone_play(uint16_t tone, uint8_t volume) {
-	uint8_t sound_prescale = (tone >> 8) + 2; // Cut the prescale part of the note - the higher bits.
+// Starts playing a tone.
+// 11 bits: [-----AAA|BBBBBBBB] - AAA=prescale, BBBBBBBB=pitch
+// Note: it plays until "stop" is executed.
+void soundlib_tone_play(uint16_t tone) {
+	tone &= 0x07ff; // Mask the tone part of the data: lower 3+8=11 bits.
+	uint8_t sound_prescale = (tone >> 8) + 2; // Cut the prescale part of the note - the higher 3 bits.
 	TCCR1 = (TCCR1 & 0b11110000) | ((sound_prescale) & 0b00001111);
 	uint8_t sound_pitch = tone & 0xff; // Mask the pitch part of the note - the lower bits.
 	OCR1C = sound_pitch;
-	uint8_t sound_volume = sound_pitch >> (8 - (volume & 7));	// 1...7 (7=lowest)
+	uint8_t sound_volume = sound_pitch >> (8 - (soundlib_melody_volume & 7));	// 1...7 (1=lowest)
 	OCR1B = sound_volume;
 	GTCCR |= (1 << PWM1B);	// set the bit
 }
 
+// Stops playing the tone.
 void soundlib_tone_stop(void) {
 	GTCCR &= ~(1 << PWM1B);	// clear the bit
 }
 
-void soundlib_melody_play(const uint16_t melody[], int size) {
+// 3+1=4 bits: [-AAAB---|--------] - AAA=length, B=dotted
+uint8_t soundlib_note_len(uint16_t melody_note) {
+	uint8_t len = (melody_note >> 11) & 0x0f; // Get the length part of the note.
+	if (!len) len = NOTE_04TH >> 11; // Check if there is a note length info. Set the default.
+	uint8_t loops = (1 << (len >> 1)); // Calculate the number of loops.
+	if (len & 1) loops += (loops >> 1); // Check if it is a dotted note. Add half length.
+	return loops;
+}
+
+// NOTE: Synchronous mode function.
+void soundlib_melody_play_sync(soundlib_melody_data_t *melody_data, int size, uint8_t volume) {
+	soundlib_melody_volume = volume;
 	for (int i = 0; i < size; i++) {
-		uint16_t melody_note = pgm_read_word(&melody[i]);
-		soundlib_tone_play(melody_note, 7);
-		_delay_ms(200);
+		uint16_t melody_note = pgm_read_word(&melody_data[i]); // Read one note from the buffer.
+		uint8_t loops = soundlib_note_len(melody_note); // Calculate the number of loops.
+		soundlib_tone_play(melody_note); // Start playing the tone.
+		while (loops--) _delay_ms(50); // The same as ... for (int j = 0; j < loops; j++) _delay_ms(50);
+		soundlib_tone_stop(); // Stop playing the tone.
+		_delay_ms(5);
 	}
 	soundlib_tone_stop();
 }
 
-void soundlib_melody_start(soundlib_melody_data_t *melody_data, int size) {
-	soundlib_melody_data_p = melody_data;
+// NOTE: Asynchronous mode function.
+void soundlib_melody_play(soundlib_melody_data_t *melody_data, int size, uint8_t volume) {
+	soundlib_melody_volume = volume;
 	soundlib_melody_data_size = size;
 	soundlib_melody_data_index = 0;
+	soundlib_melody_data_p = melody_data; // That should be last as it will trigger the start of playing.
+}
+
+// NOTE: Asynchronous mode function.
+void soundlib_melody_stop() {
+	soundlib_tone_stop(); // Stops playing the tone.
+	soundlib_melody_data_p = 0; // Clear the pointer to the melody buffer. That stops the playing.
 }
 
 // Task to be executed by the system scheduler.
+// NOTE: Asynchronous mode function.
 void soundlib_scheduler_task(scheduler_status_p scheduler) {
-	if (soundlib_melody_data_p && ((*scheduler).tick & 0x0f) == 1) {
-		uint16_t melody_note = pgm_read_word(&soundlib_melody_data_p[soundlib_melody_data_index]);
-		soundlib_tone_play(melody_note, 7);
-		soundlib_melody_data_index++;
-		if (soundlib_melody_data_index > soundlib_melody_data_size - 1) soundlib_melody_data_index = 0;
+	static uint8_t loops;
+	if (soundlib_melody_data_p) {
+		if (loops == 0) {
+			if (soundlib_melody_data_index == soundlib_melody_data_size) soundlib_melody_data_index = 0; // Restart
+			uint16_t melody_note = pgm_read_word(&soundlib_melody_data_p[soundlib_melody_data_index]); // Read one note from the buffer.
+			loops = soundlib_note_len(melody_note) << 1; // Calculate the number of loops.
+			soundlib_tone_play(melody_note);
+			soundlib_melody_data_index++;
+		} else {
+			if (loops == 1) soundlib_tone_stop(); // The last tick - stop the playing, a silence between the notes.
+			loops--;
+		}
 	}
 }
 
