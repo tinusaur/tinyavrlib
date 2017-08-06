@@ -3,6 +3,11 @@ CHANGES
 
 2017-08-06 (nb)
 
+Added 2 new tinyavrlib_sound1, tinyavrlib_sound2 modules for the Soundlib library.
+
+
+2017-08-06 (nb)
+
 Soundlib library improvements. New notes length functionality. Bugfixes and other improvements.
 
 - Implemented functionality for taking notes length into account. New soundlib_note_len function.
