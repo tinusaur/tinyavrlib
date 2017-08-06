@@ -126,6 +126,48 @@
 
 // ----------------------------------------------------------------------------
 
+/*
+    values range (5-bits) 0..31
+
+    code         ticks         name               short code
+    -----------  ------------  -----------------  ----------
+    111,1=0x0F   192 (128+64)  long-dotted        04XD
+    111,0=0x0E   128           long               04XL
+    110,1=0x0D    96 (64+32)   double-dotted      02XD
+    110,0=0x0C    64           double             02XL
+    101,1=0x0B    48 (32+16)   whole-dotted       01XD
+    101,0=0x0A    32           whole              01XL
+    100,1=0x09    24 (16+8)    half-dotted        02TD
+    100,0=0x08    16           half               02TH
+    011,1=0x07    12 (8+4)     quarter-dotted     04TD
+    011,0=0x06     8           quarter            04TH
+    010,1=0x05     6 (4+2)     eighth-dotted      08TD
+    010,0=0x04     4           eighth             08TH
+    001,1=0x03     3 (2+1)     sixteenth-dotted   16TD
+    001,0=0x02     2           sixteenth          16TH
+    000,1=0x01   ---           undefined          UND1
+    000,0=0x00   ---           undefined          UND0
+*/
+
+#define NOTE_04XD (0x0F << 11)
+#define NOTE_04XL (0x0E << 11)
+#define NOTE_02XD (0x0D << 11)
+#define NOTE_02XL (0x0C << 11)
+#define NOTE_01XD (0x0B << 11)
+#define NOTE_01XL (0x0A << 11)
+#define NOTE_02TD (0x09 << 11)
+#define NOTE_02TH (0x08 << 11)
+#define NOTE_04TD (0x07 << 11)
+#define NOTE_04TH (0x06 << 11)
+#define NOTE_08TD (0x05 << 11)
+#define NOTE_08TH (0x04 << 11)
+#define NOTE_16TD (0x03 << 11)
+#define NOTE_16TH (0x02 << 11)
+#define NOTE_UND1 (0x01 << 11)
+#define NOTE_UND0 (0x00 << 11)
+
+// ----------------------------------------------------------------------------
+
 #endif
 
 // ----------------------------------------------------------------------------
