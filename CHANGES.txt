@@ -1,6 +1,14 @@
 CHANGES
 
 
+2017-11-13 (nb)
+
+Fixed soundlib_init, Timer mode making BP1 unusable. Updated TODO list.
+
+- Fixed soundlib_init, Timer mode making BP1 unusable.
+- Updated TODO list.
+
+
 2017-08-06 (nb)
 
 Added 2 new tinyavrlib_sound1, tinyavrlib_sound2 modules for the Soundlib library.

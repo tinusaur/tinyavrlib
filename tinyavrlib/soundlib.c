@@ -43,11 +43,15 @@ void soundlib_scheduler_task(scheduler_status_p);
 void soundlib_init(void) {
 	DDRB |= (1 << PB4); // Set the port as output.
 	// Configure counter/timer1 for fast PWM on PB4
-	GTCCR |= 
-		// 1 << PWM1B |	// (done in play/stop routine) Enable PWM mode based on comparator OCR1B in Timer/Counter1.
-		1 << COM1B1 | 1 << COM1B0;	// Comparator B Mode Select: Set the OC1B output line.
-	TCCR1 |= 
-		1 << COM1A1 | 1 << COM1A0;	// Comparator A Output Mode: Set the OC1A output line.
+	/*
+	// NOTE: Looks like this mode does not work well for our purpose. It causes PB1 to be "1" all the time.
+	// TODO: Remove this after the other mode works.
+	GTCCR |= 1 << COM1B1 | 1 << COM1B0;	// Comparator B Mode Select: Set the OC1B output line.
+	TCCR1 |= 1 << COM1A1 | 1 << COM1A0;	// Comparator A Output Mode: Set the OC1A output line.
+	*/
+	GTCCR |= 1 << COM1B1;    // Setup the COM1B1/COM1B0 bits
+	GTCCR &= ~(1 << COM1B0); // (these 2 lines cold be optimized into 1)
+	TCCR1 &= ~(1 << COM1A1 | 1 << COM1A0);	// Comparator A Output Mode: Set the OC1A output line.
 }
 
 // Init the system scheduler with the library task.
@@ -68,12 +72,12 @@ void soundlib_tone_play(uint16_t tone) {
 	OCR1C = sound_pitch;
 	uint8_t sound_volume = sound_pitch >> (8 - (soundlib_melody_volume & 7));	// 1...7 (1=lowest)
 	OCR1B = sound_volume;
-	GTCCR |= (1 << PWM1B);	// set the bit
+	GTCCR |= (1 << PWM1B);	// Pulse Width Modulator B Enable
 }
 
 // Stops playing the tone.
 void soundlib_tone_stop(void) {
-	GTCCR &= ~(1 << PWM1B);	// clear the bit
+	GTCCR &= ~(1 << PWM1B);	// Pulse Width Modulator B Disable
 }
 
 // 3+1=4 bits: [-AAAB---|--------] - AAA=length, B=dotted
