@@ -26,8 +26,8 @@
 // S - Sharp ♯
 // F - Flat ♭
 
-// #define	NOTE_A0N	((8 << 8) | 142)	// Do not use these notes so the higher 5 bits
-// #define	NOTE_A0S	((8 << 8) | 134)	// are available for other purposes, e.g. length.
+// #define	NOTE_A0N	((8 << 8) | 142)	// NOTE: Do not use these notes so the higher 5 bits
+// #define	NOTE_A0S	((8 << 8) | 134)	//       are available for other purposes, e.g. length.
 #define	NOTE_B0N	((7 << 8) | 253)
 #define	NOTE_C0N	((7 << 8) | 239)
 #define	NOTE_C0S	((7 << 8) | 225)
@@ -145,8 +145,8 @@
     010,0=0x04     4           eighth             08TH
     001,1=0x03     3 (2+1)     sixteenth-dotted   16TD
     001,0=0x02     2           sixteenth          16TH
-    000,1=0x01   ---           undefined          UND1
-    000,0=0x00   ---           undefined          UND0
+    000,1=0x01     1           thirty-second      32TD
+    000,0=0x00   ---           default            DEF
 */
 
 #define NOTE_04XD (0x0F << 11)
@@ -163,8 +163,8 @@
 #define NOTE_08TH (0x04 << 11)
 #define NOTE_16TD (0x03 << 11)
 #define NOTE_16TH (0x02 << 11)
-#define NOTE_UND1 (0x01 << 11)
-#define NOTE_UND0 (0x00 << 11)
+#define NOTE_32TD (0x01 << 11)
+#define NOTE_DEF  (0x00 << 11)	// The default note length
 
 // ----------------------------------------------------------------------------
 

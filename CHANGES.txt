@@ -3,6 +3,14 @@ CHANGES
 
 2017-11-13 (nb)
 
+Updated soundlib_notes, defined thirty-second (1/32th) note. Updated TODO list.
+
+- Updated soundlib_notes, defined thirty-second (1/32th) note.
+- Updated TODO list.
+
+
+2017-11-13 (nb)
+
 Fixed soundlib_init, Timer mode making BP1 unusable. Updated TODO list.
 
 - Fixed soundlib_init, Timer mode making BP1 unusable.
