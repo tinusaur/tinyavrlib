@@ -34,8 +34,10 @@ void soundlib_scheduler(void);
 void soundlib_tone_play(uint16_t);
 void soundlib_tone_stop(void);
 void soundlib_melody_play_sync(soundlib_melody_data_t *, int, uint8_t);
+void soundlib_melody_resume(soundlib_melody_data_t *, int, uint8_t, int);
 void soundlib_melody_play(soundlib_melody_data_t *, int, uint8_t);
 void soundlib_melody_stop(void);
+int soundlib_melody_pause(void);
 
 // ----------------------------------------------------------------------------
 

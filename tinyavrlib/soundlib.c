@@ -104,17 +104,28 @@ void soundlib_melody_play_sync(soundlib_melody_data_t *melody_data, int size, ui
 }
 
 // NOTE: Asynchronous mode function.
-void soundlib_melody_play(soundlib_melody_data_t *melody_data, int size, uint8_t volume) {
+void soundlib_melody_resume(soundlib_melody_data_t *melody_data, int size, uint8_t volume, int index) {
 	soundlib_melody_volume = volume;
 	soundlib_melody_data_size = size;
-	soundlib_melody_data_index = 0;
+	soundlib_melody_data_index = index;
 	soundlib_melody_data_p = melody_data; // That should be last as it will trigger the start of playing.
+}
+
+// NOTE: Asynchronous mode function.
+void soundlib_melody_play(soundlib_melody_data_t *melody_data, int size, uint8_t volume) {
+	soundlib_melody_resume(melody_data, size, volume, 0); // Start playing from position 0 (zero) in the byffer.
 }
 
 // NOTE: Asynchronous mode function.
 void soundlib_melody_stop() {
 	soundlib_tone_stop(); // Stops playing the tone.
 	soundlib_melody_data_p = 0; // Clear the pointer to the melody buffer. That stops the playing.
+}
+
+// NOTE: Asynchronous mode function.
+int soundlib_melody_pause() {
+	soundlib_melody_stop();
+	return soundlib_melody_data_index;
 }
 
 // Task to be executed by the system scheduler.
