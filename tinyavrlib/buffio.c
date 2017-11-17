@@ -1,14 +1,13 @@
 /**
  * BUFFIO - Functions to handle cyclic buffered input/output.
  *
- * @created 2015-04-18
  * @author Neven Boyanov
  *
  * This is part of the Tinusaur/TinyAVRLib project.
  *
- * Copyright (c) 2016 Neven Boyanov, Tinusaur Team. All Rights Reserved.
+ * Copyright (c) 2017 Neven Boyanov, The Tinusaur Team. All Rights Reserved.
  * Distributed as open source software under MIT License, see LICENSE.txt file.
- * Please, as a favor, retain the link http://tinusaur.org to The Tinusaur Project.
+ * Retain in your source code the link http://tinusaur.org to the Tinusaur project.
  *
  * Source code available at: https://bitbucket.org/tinusaur/tinyavrlib
  *

@@ -3,6 +3,11 @@ CHANGES
 
 2017-11-17 (nb)
 
+Updated copyright info and texts.
+
+
+2017-11-17 (nb)
+
 Implemented 2 new functions: soundlib_melody_resume and soundlib_melody_pause.
 
 

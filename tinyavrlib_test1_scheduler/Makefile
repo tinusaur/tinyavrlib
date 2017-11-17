@@ -1,12 +1,11 @@
 #
-# SCHEDULER - Tinusaur SCHEDULER Library
+# Makefile
 #
-# @created 2016-05-07
 # @author Neven Boyanov
 #
 # This is part of the Tinusaur/TinyAVRLib project.
 #
-# Copyright (c) 2017 Neven Boyanov, Tinusaur Team. All Rights Reserved.
+# Copyright (c) 2017 Neven Boyanov, The Tinusaur Team. All Rights Reserved.
 # Distributed as open source software under MIT License, see LICENSE.txt file.
 # Retain in your source code the link http://tinusaur.org to the Tinusaur project.
 #

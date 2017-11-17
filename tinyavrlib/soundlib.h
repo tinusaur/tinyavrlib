@@ -1,7 +1,6 @@
 /**
- * Soundlib - Library for playing sounds, the TinyAVRLib Project.
+ * Soundlib - Library for playing sounds.
  *
- * @created 2017-07-14
  * @author Neven Boyanov
  *
  * This is part of the Tinusaur/TinyAVRLib project.
