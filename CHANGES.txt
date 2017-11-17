@@ -3,6 +3,11 @@ CHANGES
 
 2017-11-17 (nb)
 
+Updated text description for the notes.
+
+
+2017-11-17 (nb)
+
 Updated copyright info and texts.
 
 
