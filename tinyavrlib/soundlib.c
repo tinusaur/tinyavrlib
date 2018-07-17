@@ -1,12 +1,11 @@
 /**
  * Soundlib - Library for playing sounds, the TinyAVRLib Project.
  *
- * @created 2017-07-14
  * @author Neven Boyanov
  *
  * This is part of the Tinusaur/TinyAVRLib project.
  *
- * Copyright (c) 2017 Neven Boyanov, The Tinusaur Team. All Rights Reserved.
+ * Copyright (c) 2018 Neven Boyanov, The Tinusaur Team. All Rights Reserved.
  * Distributed as open source software under MIT License, see LICENSE.txt file.
  * Retain in your source code the link http://tinusaur.org to the Tinusaur project.
  *
@@ -31,7 +30,7 @@
 soundlib_melody_data_t *soundlib_melody_data_p;
 int soundlib_melody_data_size;
 int soundlib_melody_data_index;
-uint8_t soundlib_melody_volume;
+uint8_t soundlib_melody_volume = 7;
 
 // ----------------------------------------------------------------------------
 
@@ -66,9 +65,9 @@ void soundlib_scheduler() {
 // Note: it plays until "stop" is executed.
 void soundlib_tone_play(uint16_t tone) {
 	tone &= 0x07ff; // Mask the tone part of the data: lower 3+8=11 bits.
-	uint8_t sound_prescale = (tone >> 8) + 2; // Cut the prescale part of the note - the higher 3 bits.
+	uint8_t sound_prescale = (tone >> 8) + 2; // Cut the prescale part of the note - the higher 3 "AAA" bits.
 	TCCR1 = (TCCR1 & 0b11110000) | ((sound_prescale) & 0b00001111);
-	uint8_t sound_pitch = tone & 0xff; // Mask the pitch part of the note - the lower bits.
+	uint8_t sound_pitch = tone & 0xff; // Mask the pitch part of the note - the lower 8 "BBBBBBBB" bits.
 	OCR1C = sound_pitch;
 	uint8_t sound_volume = sound_pitch >> (8 - (soundlib_melody_volume & 7));	// 1...7 (1=lowest)
 	OCR1B = sound_volume;
