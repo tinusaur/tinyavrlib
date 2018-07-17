@@ -5,6 +5,8 @@ CHANGES
 
 Small fixes in the code and in the texts.
 
+Added new library file "debugpin.h" for DebugPin functionality.
+
 
 2017-11-17 (nb)
 
