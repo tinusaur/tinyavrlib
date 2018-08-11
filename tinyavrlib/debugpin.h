@@ -32,15 +32,15 @@
 #define DEBUGPIN_INIT()		{ DDRB |= (1 << DEBUGPIN_PORT); DEBUGPIN_LO(); }
 #define DEBUGPIN_HI()		PORTB |= (1 << DEBUGPIN_PORT)
 #define DEBUGPIN_LO()		PORTB &= ~(1 << DEBUGPIN_PORT)
-#define DEBUGPIN_TICK()		{ DEBUGPIN_HI(); DEBUGPIN_LO(); }		// One tick
-#define DEBUGPIN_TICK2()	{ DEBUGPIN_TICK(); DEBUGPIN_TICK(); }	// Double tick
-#define DEBUGPIN_TICK3()	{ DEBUGPIN_TICK(); DEBUGPIN_TICK(); DEBUGPIN_TICK(); }
+#define DEBUGPIN_TICK1()		{ DEBUGPIN_HI(); DEBUGPIN_LO(); }	// One tick
+#define DEBUGPIN_TICK2()	{ DEBUGPIN_TICK1(); DEBUGPIN_TICK1(); }	// Double tick
+#define DEBUGPIN_TICK3()	{ DEBUGPIN_TICK1(); DEBUGPIN_TICK1(); DEBUGPIN_TICK1(); }	// Triple tick
 #else
 #define DEBUGPIN_PORT		// empty
 #define DEBUGPIN_INIT()		// empty
 #define DEBUGPIN_HI()		// empty
 #define DEBUGPIN_LO()		// empty
-#define DEBUGPIN_TICK()		// empty
+#define DEBUGPIN_TICK1()		// empty
 #define DEBUGPIN_TICK2()	// empty
 #define DEBUGPIN_TICK3()	// empty
 #endif

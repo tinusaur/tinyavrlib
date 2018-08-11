@@ -1,6 +1,11 @@
 CHANGES
 
 
+2018-08-11 (nb)
+
+Renamed macros DEBUGPIN_TICK to DEBUGPIN_TICK1, for consistency in naming.
+
+
 2018-07-17 (nb)
 
 Small fixes in the code and in the texts.
