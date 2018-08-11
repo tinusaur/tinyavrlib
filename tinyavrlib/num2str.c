@@ -78,6 +78,21 @@ uint8_t usint2decascii(uint16_t num, char *buffer)
 
 // ----------------------------------------------------------------------------
 
+uint8_t usint2hexascii(uint16_t num, char *buffer) {
+	for (int8_t pos = USINT2HEXASCII_MAX_DIGITS - 1; pos >= 0 ; pos--) { // "pos" is index in an array.
+		char digit = num & 0x000f;
+		if (digit <= 9) {
+			buffer[pos] = digit + '0';	// Convert to ASCII
+		} else {
+			buffer[pos] = digit + 'A' - 10;	// Convert to ASCII
+		}
+		num = num >> 4;
+	}
+	return 4;
+}
+
+// ----------------------------------------------------------------------------
+
 // NOTE: The buffer should be always at least MAX_DIGITS in length - the function works with 16-bit numbers.
 
 uint8_t usint2binascii(uint16_t num, char *buffer) {

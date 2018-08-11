@@ -3,6 +3,8 @@ CHANGES
 
 2018-08-11 (nb)
 
+Added new function usint2hexascii for converting unsigned integer number to HEX ASCII text.
+
 Renamed macros DEBUGPIN_TICK to DEBUGPIN_TICK1, for consistency in naming.
 
 
