@@ -1,0 +1,198 @@
+CHANGES
+
+
+2021-01-18 (nb)
+
+Files migrated from Bitbucket/Mercurial to GitLab/Git.
+
+
+2019-01-06 (nb)
+
+Added new "ADCxLib" module for working with ADC.
+
+
+2018-08-11 (nb)
+
+Added new function usint2hexascii for converting unsigned integer number to HEX ASCII text.
+
+Renamed macros DEBUGPIN_TICK to DEBUGPIN_TICK1, for consistency in naming.
+
+
+2018-07-17 (nb)
+
+Small fixes in the code and in the texts.
+
+Added new library file "debugpin.h" for DebugPin functionality.
+
+
+2017-11-17 (nb)
+
+Updated text description for the notes.
+
+
+2017-11-17 (nb)
+
+Updated copyright info and texts.
+
+
+2017-11-17 (nb)
+
+Implemented 2 new functions: soundlib_melody_resume and soundlib_melody_pause.
+
+
+2017-11-13 (nb)
+
+Updated soundlib_notes, defined thirty-second (1/32th) note. Updated TODO list.
+
+- Updated soundlib_notes, defined thirty-second (1/32th) note.
+- Updated TODO list.
+
+
+2017-11-13 (nb)
+
+Fixed soundlib_init, Timer mode making BP1 unusable. Updated TODO list.
+
+- Fixed soundlib_init, Timer mode making BP1 unusable.
+- Updated TODO list.
+
+
+2017-08-06 (nb)
+
+Added 2 new tinyavrlib_sound1, tinyavrlib_sound2 modules for the Soundlib library.
+
+
+2017-08-06 (nb)
+
+Soundlib library improvements. New notes length functionality. Bugfixes and other improvements.
+
+- Implemented functionality for taking notes length into account. New soundlib_note_len function.
+- New soundlib_melody_stop function.
+- Bugfixes and additional measures for more reliable code.
+- Some functions renamed for consistency and usability. Function arguments moved around and changed, usage simplified.
+- Port PB4 is initialized now withing the library.
+- Added more text and comments in te source code.
+
+
+2017-08-06 (nb)
+
+Updated "soundlib_notes.h" file with note lengths definitions.
+
+- Updated "soundlib_notes.h" file with note lengths definitions.
+- Updated TODO list.
+
+
+2017-08-05 (nb)
+
+Removed the lowest 2 notes to make room in the higher 5 bits of the values for additional functionality.
+
+
+2017-08-05 (nb)
+
+The soundlib_scheduler function now has uint8_t argument, aligned with the scheduler_usertask function.
+
+- The soundlib_scheduler function now has uint8_t argument, aligned with the scheduler_usertask function.
+- Added more text and comments.
+
+
+2017-08-05 (nb)
+
+Bugfix: removed "break" in TIMER0_COMPA_vect loop. Added SCHEDULER_USERFUNC_NULL definition for "no user function" cases.
+
+- Bugfix: removed "break" in TIMER0_COMPA_vect loop that caused non-execution under certain circumstances.
+- Added SCHEDULER_USERFUNC_NULL definition for "no user function" cases.
+- Some variable renamed for better readability.
+- Added more text and comments.
+- Removed old and unused code.
+	
+
+2017-07-30 (nb)
+
+Updated some texts.
+
+
+2017-07-23 (nb)
+
+Added new soundlib module to the library.
+
+
+2017-07-23 (nb)
+
+Added new TODO file. Updated text files.
+
+
+2017-07-23 (nb)
+
+Updated some texts in the source code files.
+
+
+2017-04-15 (nb)
+
+IMPORTNAT: Functions buffio_skip_until, buffio_receive_until do not return result. New functions buffio_receive_untilln, buffio_receive_until2ln.
+
+- Functions buffio_skip_until, buffio_receive_until do not return result.
+- New functions buffio_receive_untilln, buffio_receive_until2ln.
+- Some code optimizations.
+- Improved source code comments.
+
+
+2017-04-11 (nb)
+
+The buffio_put function now returns char. Source code maintenance and optimization.
+
+- Default buffer size increased to more a practical 64 bytes.
+- The buffio_put function now returns char - its argument, leads to more optimized calls in conjunction with buffio_ids_receive.
+- Updated open/close bracket style.
+- Updated source code comments. Updated dates and other texts.
+
+
+2015-05-29 (nb)
+
+Added testing scripts for the new Scheduler functionality.
+
+
+2015-05-29 (nb)
+
+Implemented scheduling of up to 3 addition user-defined tasks. Improved extensibility.
+
+- New scheduler_usertask function to add up to 3 user defined tasks.
+- The __scheduler_tick variable replaced by the __scheduler_status for extensibility.
+- Reimplemented the TIMER0_COMPA_vect interrupt vector to invoke the user-defined tasks.
+
+
+2015-05-24 (nb)
+
+Simple optimization for __scheduler_tick - local and static.
+
+
+2015-05-15 (nb)
+
+Scheduler moved to the TinyAVRLib project.
+
+
+2016-04-22 (nb)
+
+Added new cpufreq.h file with code to set CPU frequency programmatically.
+
+Added new usint2binascii() function to convert numbers to binary. 
+
+Fixed typos, improved texts, formatting, etc.
+
+
+2015-09-26 (nb)
+
+Added new BUFFIO library to handle cyclic buffered input/output..
+
+- Added new BUFFIO library to handle cyclic buffered input/output..
+- Edited text files.
+
+
+2015-01-17 (nb)
+
+Added licensing and version information.
+
+
+2015-01-17 (nb)
+
+Files added to the repository.
+
+

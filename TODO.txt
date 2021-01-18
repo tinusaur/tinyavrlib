@@ -1,0 +1,23 @@
+TODO
+
+
+2017-11
+
+- Improve soundlib_tone_play, the sound_volume functionality. No longer good after switching to another timer mode.
+- (done) Implement soundlib_melody_pause and soundlib_melody_resume.
+
+
+2017-08
+
+- Rename testing scripts folders, consistent with other projects. Ex.: tinyavrlib_test1_scheduler, tinyavrlib_test2_scheduler.
+
+
+2017-07
+
+- Add testing scripts for the soundlib library.
+
+
+2015-01
+
+- (done) Start using source code repository.
+
