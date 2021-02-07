@@ -1,24 +1,14 @@
 /**
  * TinyAVRLib/Soundlib - Testing scripts
- *
- * @created 2017-07-13
  * @author Neven Boyanov
- *
  * This is part of the Tinusaur/TinyAVRLib project.
- *
- * Copyright (c) 2017 Neven Boyanov, The Tinusaur Team. All Rights Reserved.
- * Distributed as open source software under MIT License, see LICENSE.txt file.
- * Retain in your source code the link http://tinusaur.org to the Tinusaur project.
- *
- * Source code available at: https://bitbucket.org/tinusaur/tinyavrlib
- *
+ * ----------------------------------------------------------------------------
+ *  Copyright (c) 2021 Tinusaur (https://tinusaur.com). All rights reserved.
+ *  Distributed as open source under the MIT License (see the LICENSE.txt file)
+ *  Please, retain in your work a link to the Tinusaur project website.
+ * ----------------------------------------------------------------------------
+ * Source code available at: https://gitlab.com/tinusaur/tinyavrlib
  */
-
-// ============================================================================
-
-// #define F_CPU 1000000UL
-// NOTE: The F_CPU (CPU frequency) should not be defined in the source code.
-//       It should be defined in either (1) Makefile; or (2) in the IDE. 
 
 #include <stdint.h>
 #include <avr/io.h>
@@ -28,7 +18,6 @@
 #include "tinyavrlib/scheduler.h"
 #include "tinyavrlib/soundlib.h"
 #include "tinyavrlib/soundlib_notes.h"
-
 #include "ode_to_joy.h"
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -42,28 +31,20 @@
 //              Tinusaur Board
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-// ----------------------------------------------------------------------------
-
 int main(void) {
-
-	// ---- Initialization ----
-
+	// ---- Init ----
 	scheduler_init(SCHEDULER_USERFUNC_NULL);
 	scheduler_reinit(SCHEDULER_TCCR0B_1024, SCHEDULER_OCR0A_MIN);	// Adjust, if necessary
 	scheduler_start();
-
 	soundlib_init();
 	soundlib_scheduler();
 
-	// ---- Testing: Buzzer ----
-
+	// ---- Testing: Melody ----
 	soundlib_melody_play(ode_to_joy_notes, sizeof(ode_to_joy_notes) / sizeof(ode_to_joy_notes[0]), 7);
 	scheduler_start();	// Start the scheduler
-
 	for (;;) { /* Infinite main loop */ }
 
-	// Return the mandatory for the "main" function int value. It is "0" for success.
-	return 0;
+	return 0; // Return the mandatory for the "main" function int value - "0" for success.
 }
 
 // ============================================================================
