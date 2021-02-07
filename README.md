@@ -19,4 +19,13 @@ NOTE: This project was developed and tested the ATtiny85 microcontrollers. It mi
 
 Folders and modules:
 - tinyavrlib	- The library
+  - adcxlib	- Working with the ADC.
+  - buffio	- Buffer for use with I/O.
+  - buzzlib	- Buzzer sound effects.
+  - cpufreq	- CPU frequency setting.
+  - debugpin	- Debugging using one pin and an LED.
+  - num2str	- Converting number to a strings - Dec, Hex, Bin.
+  - scheduler	- Scheduling tasks using timers.
+  - soundlib	- Playing sounds and melodies.
+
 
