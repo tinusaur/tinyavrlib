@@ -1,17 +1,14 @@
-TinyAVRLib - Tinusaur Library
-
-This is a testing project.
+TESTING - This is a testing project for the library.
 
 To build the project, type:
-   $ make
+	$ make
 
-To program the binary into the microcontroller, type:
-   $ make program
+To upload the binary into the microcontroller, type:
+	$ make program
 
-Alternatively, to program the binary, type:
+Alternatively, to upload the binary, type:
 	$ avrdude -c usbasp -p t85 -U flash:w:"main.hex":a
 
 To clean up files left out from previous builds, type:
    $ make clean
-
 
