@@ -1,16 +1,13 @@
 /**
- * Scheduler - Library to schedule time tasks
- *
+ * TinyAVRLib/Scheduler - Library to schedule time tasks
  * @author Neven Boyanov
- *
  * This is part of the Tinusaur/TinyAVRLib project.
- *
- * Copyright (c) 2018 Neven Boyanov, Tinusaur Team. All Rights Reserved.
- * Distributed as open source software under MIT License, see LICENSE.txt file.
- * Retain in your source code the link http://tinusaur.org to the Tinusaur project.
- *
- * Source code available at: https://bitbucket.org/tinusaur/tinyavrlib
- *
+ * ----------------------------------------------------------------------------
+ *  Copyright (c) 2021 Tinusaur (https://tinusaur.com). All rights reserved.
+ *  Distributed as open source under the MIT License (see the LICENSE.txt file)
+ *  Please, retain in your work a link to the Tinusaur project website.
+ * ----------------------------------------------------------------------------
+ * Source code available at: https://gitlab.com/tinusaur/tinyavrlib
  */
 
 // ============================================================================
@@ -26,10 +23,6 @@
 static scheduler_userproc __scheduler_userprocs[4];
 static uint8_t __scheduler_counters[4];
 static uint8_t __scheduler_countdowns[4];
-
-// TODO: Add list of user functions.
-// TODO: Implement scheduler_add that adds user function to the list.
-// TODO: Call all user functions within the TIMER0_COMPA_vect.
 
 static uint8_t __scheduler_tccr0b = SCHEDULER_TCCR0B;
 static uint8_t __scheduler_ocr0a = SCHEDULER_OCR0A;

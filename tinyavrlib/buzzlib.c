@@ -1,16 +1,13 @@
 /**
- * BuzzLib - Library for playing sounds, the TinyAVRLib Project.
- *
+ * TinyAVRLib/BuzzLib - Library for playing sound effects on a buzzer
  * @author Neven Boyanov
- *
  * This is part of the Tinusaur/TinyAVRLib project.
- *
- * Copyright (c) 2020 Neven Boyanov, The Tinusaur Team. All Rights Reserved.
- * Distributed as open source software under MIT License, see LICENSE.txt file.
- * Retain in your source code the link http://tinusaur.org to the Tinusaur project.
- *
- * Source code available at: https://bitbucket.org/tinusaur/tinyavrlib
- *
+ * ----------------------------------------------------------------------------
+ *  Copyright (c) 2021 Tinusaur (https://tinusaur.com). All rights reserved.
+ *  Distributed as open source under the MIT License (see the LICENSE.txt file)
+ *  Please, retain in your work a link to the Tinusaur project website.
+ * ----------------------------------------------------------------------------
+ * Source code available at: https://gitlab.com/tinusaur/tinyavrlib
  */
 
 // ============================================================================

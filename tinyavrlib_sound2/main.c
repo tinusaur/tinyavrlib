@@ -22,13 +22,13 @@
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //                 ATtiny85
-//               +----------+   (-)--GND--
-//       (RST)---+ PB5  Vcc +---(+)--VCC--
-// ---[OWOWOD]---+ PB3  PB2 +-------------
-// ---[Buzzer]---+ PB4  PB1 +-------------
-// --------(-)---+ GND  PB0 +-------------
+//               +----------+    (-)--GND--
+//      (RST)--> + PB5  Vcc +----(+)--VCC--
+//   [OWOWOD]--> + PB3  PB2 +--------------
+// --[Buzzer]----+ PB4  PB1 +--------------
+// -------(-)----+ GND  PB0 +--------------
 //               +----------+
-//              Tinusaur Board
+//                 Tinusaur
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 int main(void) {
@@ -42,7 +42,7 @@ int main(void) {
 	// ---- Testing: Melody ----
 	soundlib_melody_play(ode_to_joy_notes, sizeof(ode_to_joy_notes) / sizeof(ode_to_joy_notes[0]), 7);
 	scheduler_start();	// Start the scheduler
-	for (;;) { /* Infinite main loop */ }
+	for (;;) { /* The infinite main loop (NOTING TO DO) */ }
 
 	return 0; // Return the mandatory for the "main" function int value - "0" for success.
 }
