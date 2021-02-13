@@ -10,7 +10,7 @@ TinyAVRLib source code:   https://gitlab.com/tinusaur/tinyavrlib
 TinyAVRLib project page:  http://tinusaur.org/projects/tinyavrlib/
 
 NOTE: This project was developed and tested the ATtiny85 microcontrollers.
-      It might or might not work under other environments.
+      It might or might not work in other environments.
 
 Tinusaur website: http://tinusaur.org
 Tinusaur on Twitter: https://twitter.com/tinusaur
