@@ -25,10 +25,7 @@
 void adcx_init(void) {
 	// ---- Initialize ADC ----
 	ADMUX =
-	    // x00 - Vcc used as Voltage Reference, disconnected from PB0 (AREF).
-	    // 010 - Internal 1.1V Voltage Reference.
-	    // 110 - Internal 2.56V Voltage Reference without external bypass capacitor, disconnected from PB0 (AREF).
-	    (1 << REFS2) | (1 << REFS1) | (0 << REFS0) |
+	    (1 << REFS2) | (1 << REFS1) | (0 << REFS0) |	// TODO: Use ADCX_REFSEL here.
 	    (0 << ADLAR);	// Set/Clear left shift result
 	ADCSRA =
 	    (1 << ADEN) |	// Enable ADC
@@ -43,13 +40,17 @@ void adcx_init(void) {
 	    (0 << ADTS2) | (0 << ADTS1) | (0 << ADTS0);	// Set mode, 000 = free running mode
 }
 
+// TODO: Replace with the macros ADCX_ADCSEL.
 void adcx_select(uint8_t mask) {
 	ADMUX = (ADMUX & 0b11110000) | mask;
 }
 
+// TODO: Replace with a macros.
 void adcx_start(void) {
 	ADCSRA |= (1 << ADSC);	// Set start conversions
 }
+
+// TODO: Implement "stop" function or macros.
 
 uint16_t adcx_read(void) {
 	union adcx_result {

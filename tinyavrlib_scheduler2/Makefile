@@ -104,7 +104,8 @@ EXTLIBSDIR = ../
 #
 # Source files
 #	Add external libraries source code files here
-EXTLIBSOURCES = tinyavrlib/scheduler.c tinyavrlib/soundlib.c 
+# EXTLIBSOURCES = tinyavrlib/scheduler.c owowod/owowod.c tinyavrlib/num2str.c
+EXTLIBSOURCES = tinyavrlib/scheduler.c
 #
 # Construct list of external libraries source files:
 #	DO NOT edit this line

@@ -24,9 +24,9 @@
 
 // ----------------------------------------------------------------------------
 
-#define DEBUGPIN_ENABLED	// DebugPin enabled
+// #define DEBUGPIN_ENABLED	// DebugPin enabled
 // NOTE: Comment/uncomment the above line to disable/enable the DEBUGPIN functionality.
-// NOTE: Enabling it might sligtly increasy the timingsof the code, so be careful.
+// NOTE: Enabling it might slightly increase the timings of the code, so be careful.
 #ifdef DEBUGPIN_ENABLED
 #define DEBUGPIN_PORT		PB2 // DebugPin output port
 #define DEBUGPIN_INIT()		{ DDRB |= (1 << DEBUGPIN_PORT); DEBUGPIN_LO(); }

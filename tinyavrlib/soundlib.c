@@ -1,16 +1,13 @@
 /**
- * Soundlib - Library for playing sounds, the TinyAVRLib Project.
- *
+ * TinyAVRLib/Soundlib - Library for playing sounds
  * @author Neven Boyanov
- *
  * This is part of the Tinusaur/TinyAVRLib project.
- *
- * Copyright (c) 2018 Neven Boyanov, The Tinusaur Team. All Rights Reserved.
- * Distributed as open source software under MIT License, see LICENSE.txt file.
- * Retain in your source code the link http://tinusaur.org to the Tinusaur project.
- *
- * Source code available at: https://bitbucket.org/tinusaur/tinyavrlib
- *
+ * ----------------------------------------------------------------------------
+ *  Copyright (c) 2021 Tinusaur (https://tinusaur.com). All rights reserved.
+ *  Distributed as open source under the MIT License (see the LICENSE.txt file)
+ *  Please, retain in your work a link to the Tinusaur project website.
+ * ----------------------------------------------------------------------------
+ * Source code available at: https://gitlab.com/tinusaur/tinyavrlib
  */
 
 // ============================================================================
@@ -112,7 +109,7 @@ void soundlib_melody_resume(soundlib_melody_data_t *melody_data, int size, uint8
 
 // NOTE: Asynchronous mode function.
 void soundlib_melody_play(soundlib_melody_data_t *melody_data, int size, uint8_t volume) {
-	soundlib_melody_resume(melody_data, size, volume, 0); // Start playing from position 0 (zero) in the byffer.
+	soundlib_melody_resume(melody_data, size, volume, 0); // Start playing from position 0 (zero) in the buffer.
 }
 
 // NOTE: Asynchronous mode function.

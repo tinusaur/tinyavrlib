@@ -1,5 +1,5 @@
 /**
- * TinyAVRLib/Soundlib - Testing scripts
+ * TinyAVRLib/BuzzLib - Testing scripts
  * @author Neven Boyanov
  * This is part of the Tinusaur/TinyAVRLib project.
  * ----------------------------------------------------------------------------
@@ -13,12 +13,8 @@
 #include <stdint.h>
 #include <avr/io.h>
 #include <util/delay.h>
-#include <avr/pgmspace.h>
 
-#include "tinyavrlib/scheduler.h"
-#include "tinyavrlib/soundlib.h"
-#include "tinyavrlib/soundlib_notes.h"
-#include "ode_to_joy.h"
+#include "tinyavrlib/buzzlib.h"
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //                 ATtiny85
@@ -33,16 +29,39 @@
 
 int main(void) {
 	// ---- Init ----
-	scheduler_init(SCHEDULER_USERFUNC_NULL);
-	scheduler_reinit(SCHEDULER_TCCR0B_1024, SCHEDULER_OCR0A_MIN);	// Adjust, if necessary
-	scheduler_start();
-	soundlib_init();
-	soundlib_scheduler();
+	buzzlib_init();
 
-	// ---- Testing: Melody ----
-	soundlib_melody_play(ode_to_joy_notes, sizeof(ode_to_joy_notes) / sizeof(ode_to_joy_notes[0]), 7);
-	scheduler_start();	// Start the scheduler
-	for (;;) { /* The infinite main loop (NOTING TO DO) */ }
+	// ---- Main Loop ----
+	for (;;) { // The infinite main loop
+		/*
+		buzzlib_tone(255, 255);
+		_delay_ms(100);
+		buzzlib_tone(128, 255);
+		_delay_ms(100);
+		buzzlib_tone(64, 255);
+		_delay_ms(100);
+		buzzlib_tone(1, 255);
+		_delay_ms(100);
+		*/
+
+		buzzlib_fx(224, 4, 40, 1, 6);
+		_delay_ms(2000);
+
+		BUZZLIB_BEEP1();
+		_delay_ms(2000);
+		BUZZLIB_BEEP2();
+		_delay_ms(2000);
+		BUZZLIB_BEEP3();
+		_delay_ms(2000);
+		BUZZLIB_ALARM();
+		_delay_ms(2000);
+		BUZZLIB_SIREN();
+		_delay_ms(2000);
+		BUZZLIB_CREAK();
+		_delay_ms(2000);
+		BUZZLIB_PHONE();
+		_delay_ms(2000);
+	}
 
 	return 0; // Return the mandatory for the "main" function int value - "0" for success.
 }
