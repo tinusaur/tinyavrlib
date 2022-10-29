@@ -36,7 +36,7 @@ void buzzlib_init(void) {
 // per,len - the period and the length of the signal
 // NOTE: The value of per should never be 0, it will cause infinite while() loop.
 // For per=255 Freq=100Hz, for per=1 Freq=17.9KHz
-// For len=255 Duration=1282mS, for len=255 Duration=7.2mS
+// For len=255 Duration=1282mS, for len=1 Duration=7.2mS
 void buzzlib_tone(uint8_t per, uint8_t len) {
 	int16_t num = (len << 7);	// This shift should not be more than 7, it will overflow the int16_t.
 	while (num >= 0) {
@@ -49,6 +49,13 @@ void buzzlib_tone(uint8_t per, uint8_t len) {
 	}
 }
 
+static buzzlib_fx_callback_p __buzzlib_fx_callback = 0;
+
+void buzzlib_fx_callback(buzzlib_fx_callback_p callback) {
+	__buzzlib_fx_callback = callback;
+}
+
+// per,len - the period and the length of the signal
 // rep - the number of repeats
 // pause - the pause between repeats
 // dev - the deviation in the period between repeats
@@ -65,6 +72,7 @@ void buzzlib_fx(uint8_t per, uint8_t len, uint8_t rep, uint8_t pause, int8_t dev
 		}
 		for (uint8_t loop = pause; loop > 0; loop--) _delay_ms(1);
 		if (per > dev) per -= dev;
+		if (__buzzlib_fx_callback) (*__buzzlib_fx_callback)(rep);
 	}
 }
 

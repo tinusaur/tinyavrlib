@@ -43,6 +43,12 @@ void buzzlib_fx(uint8_t per, uint8_t len, uint8_t rep, uint8_t pause, int8_t div
 
 // ----------------------------------------------------------------------------
 
+typedef void (*buzzlib_fx_callback_p)(uint8_t rep);
+
+void buzzlib_fx_callback(buzzlib_fx_callback_p callback);
+
+// ----------------------------------------------------------------------------
+
 #endif
 
 // ============================================================================
