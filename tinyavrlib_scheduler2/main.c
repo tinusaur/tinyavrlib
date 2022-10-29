@@ -13,18 +13,15 @@
 #include <stdint.h>
 #include <avr/io.h>
 #include <util/delay.h>
+#include <avr/interrupt.h>
 
 #include "tinyavrlib/scheduler.h"
-
-// NOTE: To remove the use of the DEBUGGING: (1) remove its use from this file; (2) remove it (owowod and num2str) from the Makefile.
-// #include "owowod/owowod.h"
-// #include "owowod/debugging.h"
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //                 ATtiny85
 //               +----------+    (-)--GND--
 //      (RST)--> + PB5  Vcc +----(+)--VCC--
-//   [OWOWOD]--> + PB3  PB2 +----LED2------
+// ------LED3----+ PB3  PB2 +----LED2------
 // ------LED4----+ PB4  PB1 +----LED1------
 // -------(-)----+ GND  PB0 +----LED0------
 //               +----------+
@@ -34,38 +31,33 @@
 #define LED0_PORT PB0
 #define LED1_PORT PB1
 #define LED2_PORT PB2
-// #define LED3_PORT PB3	// NOTE: Used by the OWOWOD library
+#define LED3_PORT PB3
 #define LED4_PORT PB4
 
 // ----------------------------------------------------------------------------
 
-void scheduler_func0(uint32_t scheduler_tick) {
-	// DEBUGGING_VARU("userfunc, tick", scheduler_tick); DEBUGGING_CRLF();
-	PORTB ^= (1 << LED4_PORT);	// Flip the bit
-}
-
-void scheduler_task1(scheduler_status_p scheduler) {
-	// DEBUGGING_VARU("task1, tick", (*scheduler).tick); DEBUGGING_CRLF();
+void scheduler_task0(void) {
 	PORTB ^= (1 << LED0_PORT);	// Flip the bit
 }
 
-void scheduler_task2(scheduler_status_p scheduler) {
-	// DEBUGGING_VARU("task2, tick", (*scheduler).tick); DEBUGGING_CRLF();
+void scheduler_task1(void) {
 	PORTB ^= (1 << LED1_PORT);	// Flip the bit
 }
 
-void scheduler_task3(scheduler_status_p scheduler) {
-	// DEBUGGING_VARU("task3, tick", (*scheduler).tick); DEBUGGING_CRLF();
+void scheduler_task2(void) {
 	PORTB ^= (1 << LED2_PORT);	// Flip the bit
+}
+
+void scheduler_task3(void) {
+	PORTB ^= (1 << LED3_PORT);	// Flip the bit
 }
 
 // ----------------------------------------------------------------------------
 
 int main(void) {
 	// ---- Init ----
-	// DEBUGGING_INIT();
-	// DEBUGGING_CRLF(); DEBUGGING_STRINGLN("HELLO[SCHEDULER]");	// Not really needed
-	scheduler_init(scheduler_func0);
+	scheduler_init();
+	scheduler_usertask(scheduler_task0, 0);
 	scheduler_usertask(scheduler_task1, 1);
 	scheduler_usertask(scheduler_task2, 2);
 	scheduler_usertask(scheduler_task3, 3);
@@ -75,14 +67,19 @@ int main(void) {
 	DDRB |= (1 << LED0_PORT); // Set port as LED output
 	DDRB |= (1 << LED1_PORT); // Set port as LED output
 	DDRB |= (1 << LED2_PORT); // Set port as LED output
-	// DDRB |= (1 << LED3_PORT); // 	// NOTE: Used by the OWOWOD library
+	DDRB |= (1 << LED3_PORT); // Set port as LED output
 	DDRB |= (1 << LED4_PORT); // Set port as LED output
 
 	// Start the scheduler
 	scheduler_start();
 
 	// ---- Main Loop ----
-	for (;;) { /* The infinite main loop (NOTING TO DO) */ }
+	for (;;) { /* The infinite main loop */
+		cli();
+		PORTB ^= (1 << LED4_PORT);	// Flip the bit
+		sei();
+		_delay_ms(1000);
+	}
 
 	return 0; // Return the mandatory for the "main" function int value - "0" for success.
 }

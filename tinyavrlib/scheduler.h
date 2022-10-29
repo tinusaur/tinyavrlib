@@ -42,41 +42,37 @@
 #define SCHEDULER_TCCR0B_XT0F	(1 << CS02) | (1 << CS01) | (0 << CS00)	// External clock source on T0 pin. Clock on falling edge.
 #define SCHEDULER_TCCR0B_XT0R	(1 << CS02) | (1 << CS01) | (1 << CS00)	// External clock source on T0 pin. Clock on rising edge.
 
-#define SCHEDULER_OCR0A_MIN			9	// Reasonable minimum, roughly 100 ticks/sec. at 1 MHz CPU clock and 1024 pre-scale.
-#define SCHEDULER_OCR0A_DEFAULT		97	// Default, gives about 10 ticks per second at 1 MHz CPU clock and 1024 pre-scale.
-#define SCHEDULER_OCR0A_MAX			255	// Absolute maximum, roughly 4 ticks/sec. at 1 MHz CPU clock and 1024 pre-scale.
+#define SCHEDULER_OCR0A_MIN			0	// Absolute minimum, roughly 1.024 ms ticks (976 Hz) at 1024 pre-scale. (1 MHz CPU)
+#define SCHEDULER_OCR0A_DEFAULT		98	// Default, gives roughly 100.35 ms ticks (9.96 Hz) at 1024 pre-scale. (1 MHz CPU)
+#define SCHEDULER_OCR0A_MAX			255	// Absolute maximum, roughly 262 ms ticks (3.81 Hz) at 1024 pre-scale. (1 MHz CPU)
+
+// PERIOD_us = (PRESCALER * (COUNTER + 1)) / FREQ_CPU_hz
+// FREQ_hz   = FREQ_CPU_hz / (PRESCALER * (COUNTER + 1))
+// Useful TCCR0B/OCR0A combinations: 8/124 ==> 1.0ms (more precise)
 
 #define SCHEDULER_TCCR0B			SCHEDULER_TCCR0B_1024
 #define SCHEDULER_OCR0A				SCHEDULER_OCR0A_DEFAULT
 
-#define SCHEDULER_USERFUNC_NULL		((scheduler_userfunc_p)0)
-
 // ----------------------------------------------------------------------------
 
-typedef struct {
-	uint32_t tick;
-} scheduler_status;
+// typedef struct {
+//	uint32_t tick;
+// } scheduler_status;
 // NOTE: This structure may be extended in the future.
+// NOTE: Not used at the moment.
+// TODO: Remove the use of scheduler_status.
+// typedef scheduler_status * scheduler_status_p;
 
-typedef scheduler_status * scheduler_status_p;
-
-typedef void (*scheduler_userfunc_p)(uint32_t tick);
-
-// EXAMPLE: void my_scheduler_userfunc(uint32_t tick);
-
-typedef void (*scheduler_usertask_p)(scheduler_status_p scheduler);
-
-// EXAMPLE: void my_scheduler_usertask(scheduler_status_p scheduler);
+typedef void (*scheduler_usertask_p)(void);
 
 typedef union {
-	scheduler_userfunc_p userfunc;
 	scheduler_usertask_p usertask;
 	void (*userproc)(void);
 } scheduler_userproc;
 
 // ----------------------------------------------------------------------------
 
-void scheduler_init(scheduler_userfunc_p);
+void scheduler_init(void);
 void scheduler_reinit(uint8_t, uint8_t);
 void scheduler_usertask(scheduler_usertask_p usertask, uint8_t counter);
 void scheduler_start(void);
