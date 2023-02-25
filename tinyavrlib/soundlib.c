@@ -32,7 +32,7 @@ uint8_t soundlib_melody_volume = 7;
 // ----------------------------------------------------------------------------
 
 // Task to be executed by the system scheduler.
-void soundlib_scheduler_task(scheduler_status_p);
+void soundlib_scheduler_task(void);
 
 // ----------------------------------------------------------------------------
 
@@ -53,7 +53,7 @@ void soundlib_init(void) {
 // Init the system scheduler with the library task.
 // This is necessary to be called if any of the asynchronous mode functions are used.
 void soundlib_scheduler() {
-	scheduler_usertask(soundlib_scheduler_task, 1);
+	scheduler_usertask(soundlib_scheduler_task, 15);
 	// Note: The second argument could be used to specify the tempo.
 }
 
@@ -126,7 +126,7 @@ int soundlib_melody_pause() {
 
 // Task to be executed by the system scheduler.
 // NOTE: Asynchronous mode function.
-void soundlib_scheduler_task(scheduler_status_p scheduler) {
+void soundlib_scheduler_task() {
 	static uint8_t loops;
 	if (soundlib_melody_data_p) {
 		if (loops == 0) {

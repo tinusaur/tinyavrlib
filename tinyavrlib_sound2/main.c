@@ -33,7 +33,7 @@
 
 int main(void) {
 	// ---- Init ----
-	scheduler_init(SCHEDULER_USERFUNC_NULL);
+	scheduler_init();
 	scheduler_reinit(SCHEDULER_TCCR0B_1024, SCHEDULER_OCR0A_MIN);	// Adjust, if necessary
 	scheduler_start();
 	soundlib_init();
