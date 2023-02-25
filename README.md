@@ -8,11 +8,11 @@ TinyAVRLib - Library of commonly used function for tinyAVR microcontrollers.
 
 - TinyAVRLib source code: https://gitlab.com/tinusaur/tinyavrlib  
   GitHub mirror at: https://github.com/tinusaur/tinyavrlib
-- TinyAVRLib project page: http://tinusaur.org/projects/tinyavrlib
+- TinyAVRLib project page: https://tinusaur.com/projects/tinyavrlib
 
 NOTE: This project was developed for and tested on the ATtiny85 microcontrollers. It might or might not work in other environments.
 
-- Tinusaur website: https://tinusaur.org
+- Tinusaur website: https://tinusaur.com
 - Tinusaur on Twitter: https://twitter.com/tinusaur
 - Tinusaur on Facebook: https://www.facebook.com/tinusaur
 
