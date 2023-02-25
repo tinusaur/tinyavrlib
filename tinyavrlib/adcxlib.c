@@ -29,7 +29,8 @@ void adcx_init(void) {
 	    (0 << ADLAR);	// Set/Clear left shift result
 	ADCSRA =
 	    (1 << ADEN) |	// Enable ADC
-	    (1 << ADATE) |	// Enable auto trigger enable
+	    (0 << ADEN) |	// ADC Start Conversion (not starter at init)
+	    (1 << ADATE) |	// Enable auto trigger enable (Q: Is it used in free running mode?)
 		// (1 << ADIE) |	// Enable ADC interrupt
 	    // Setup ADC Prescaler
 	    // 001=1: 1/2nd ... 1MHz / 2 = 500KHz
@@ -41,14 +42,14 @@ void adcx_init(void) {
 }
 
 // TODO: Replace with the macros ADCX_ADCSEL.
-void adcx_select(uint8_t mask) {
-	ADMUX = (ADMUX & 0b11110000) | mask;
-}
+// void adcx_select(uint8_t mask) {
+//	ADMUX = (ADMUX & 0b11110000) | mask;
+// }
 
-// TODO: Replace with a macros.
-void adcx_start(void) {
-	ADCSRA |= (1 << ADSC);	// Set start conversions
-}
+// TODO: Replace use with the ADCX_START() macros.
+// void adcx_start(void) {
+//	ADCSRA |= (1 << ADSC);	// Set start conversions
+// }
 
 // TODO: Implement "stop" function or macros.
 

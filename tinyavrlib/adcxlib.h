@@ -23,7 +23,7 @@
 #include <stdint.h>
 
 // ----------------------------------------------------------------------------
-//                 +----------+
+//   Temp=[ADC4]   +----------+
 //  --(RST/ADC0)---+ PB5  Vcc +---(+)--VCC--
 //  ------[ADC3]---+ PB3  PB2 +---[ADC1]----
 //  ------[ADC2]---+ PB4  PB1 +-------------
@@ -44,18 +44,22 @@
 #define ADCX_REFSEL_MASK_RESERVED	((0 << REFS2) | (1 << REFS1) | (1 << REFS0))	// Reserved
 #define ADCX_REFSEL_MASK_INT256V	((1 << REFS2) | (1 << REFS1) | (0 << REFS0))	// Internal 2.56V Voltage Reference without external bypass capacitor, disconnected from PB0 (AREF).
 #define ADCX_REFSEL_MASK_INT256VXBP	((1 << REFS2) | (1 << REFS1) | (1 << REFS0))	// Internal 2.56V Voltage Reference with external bypass capacitor at PB0 (AREF) pin.
-// NOTE from Datasheet: The device requires a supply voltage of 3V in order to generate 2.56V reference voltage.
+// NOTE from Datasheet: The device requires a supply voltage of at least 3V in order to generate 2.56V reference voltage.
+// NOTE from Datasheet: Whenever these bits are changed, the next conversion will take 25 ADC clock cycles.
+//						For Prescale 1/128th at 1MHz, 25 ADC clock cycles are 0.0032 sec.
+#define ADCX_CHANGE_DELAY		4	// Small delay (in ms) might be necessary for correct first ADC, and after changes.
 
 // ----------------------------------------------------------------------------
 
-#define ADCX_ADCSEL(MASK)	ADMUX = (ADMUX & 0b11110000) | (MASK)	// Select ADC source
-#define ADCX_REFSEL(MASK)	ADMUX = (ADMUX & 0b00101111) | (MASK)	// Select voltage reference
+#define ADCX_ADCSEL(MASK)	ADMUX = (ADMUX & 0b11110000) | (MASK & 0b00001111)	// Select ADC source
+#define ADCX_REFSEL(MASK)	ADMUX = (ADMUX & 0b00101111) | (MASK & 0b11010000)	// Select voltage reference
+#define ADCX_START()		ADCSRA |= (1 << ADSC)	// Set start conversions
 
 // ----------------------------------------------------------------------------
 
 void adcx_init(void);
-void adcx_select(uint8_t mask);
-void adcx_start(void);
+// void adcx_select(uint8_t mask);	// TODO: Replace use with ADCX_ADCSEL()
+// void adcx_start(void);	// TODO: Replace use with ADCX_START()
 uint16_t adcx_read(void);
 
 // ----------------------------------------------------------------------------
