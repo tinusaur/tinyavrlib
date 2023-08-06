@@ -52,8 +52,8 @@ void soundlib_init(void) {
 
 // Init the system scheduler with the library task.
 // This is necessary to be called if any of the asynchronous mode functions are used.
-void soundlib_scheduler() {
-	scheduler_usertask(soundlib_scheduler_task, 15);
+void soundlib_scheduler(uint8_t tempo) {
+	scheduler_usertask(soundlib_scheduler_task, tempo);
 	// Note: The second argument could be used to specify the tempo.
 }
 
@@ -79,7 +79,7 @@ void soundlib_tone_stop(void) {
 // 3+1=4 bits: [-AAAB---|--------] - AAA=length, B=dotted
 uint8_t soundlib_note_len(uint16_t melody_note) {
 	uint8_t len = (melody_note >> 11) & 0x0f; // Get the length part of the note.
-	if (!len) len = NOTE_04TH >> 11; // Check if there is a note length info. Set the default.
+	if (!len) len = NOTE_08TH >> 11; // Check if there is a note length info. If not, set a default.
 	uint8_t loops = (1 << (len >> 1)); // Calculate the number of loops.
 	if (len & 1) loops += (loops >> 1); // Check if it is a dotted note. Add half length.
 	return loops;
@@ -132,11 +132,11 @@ void soundlib_scheduler_task() {
 		if (loops == 0) {
 			if (soundlib_melody_data_index == soundlib_melody_data_size) soundlib_melody_data_index = 0; // Restart
 			uint16_t melody_note = pgm_read_word(&soundlib_melody_data_p[soundlib_melody_data_index]); // Read one note from the buffer.
-			loops = soundlib_note_len(melody_note) << 1; // Calculate the number of loops.
+			loops = soundlib_note_len(melody_note) << 2; // Calculate the number of loops.
 			soundlib_tone_play(melody_note);
 			soundlib_melody_data_index++;
 		} else {
-			if (loops == 1) soundlib_tone_stop(); // The last tick - stop the playing, a silence between the notes.
+			if (loops == 1) soundlib_tone_stop(); // At the last tick - stop the playing (silence at the end of the note)
 			loops--;
 		}
 	}

@@ -21,12 +21,16 @@
 
 // ----------------------------------------------------------------------------
 
+#define SOUNDLIB_TEMPO	8	// The default tempo
+
+// ----------------------------------------------------------------------------
+
 typedef const uint16_t soundlib_melody_data_t;
 
 // ----------------------------------------------------------------------------
 
 void soundlib_init(void);
-void soundlib_scheduler(void);
+void soundlib_scheduler(uint8_t);
 void soundlib_tone_play(uint16_t);
 void soundlib_tone_stop(void);
 void soundlib_melody_play_sync(soundlib_melody_data_t *, int, uint8_t);

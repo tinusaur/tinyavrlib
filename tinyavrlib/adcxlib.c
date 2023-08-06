@@ -45,11 +45,13 @@ void adcx_init(void) {
 // void adcx_select(uint8_t mask) {
 //	ADMUX = (ADMUX & 0b11110000) | mask;
 // }
+// Done.
 
 // TODO: Replace use with the ADCX_START() macros.
 // void adcx_start(void) {
 //	ADCSRA |= (1 << ADSC);	// Set start conversions
 // }
+// Done.
 
 // TODO: Implement "stop" function or macros.
 
