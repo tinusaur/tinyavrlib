@@ -1,16 +1,13 @@
 /**
- * ADCxLib - Simple library to work with ADC
- *
+ * TinyAVRLib/ADCxLib - Library to work with the ADC inputs
  * @author Neven Boyanov
- *
  * This is part of the Tinusaur/TinyAVRLib project.
- *
- * Copyright (c) 2017 Neven Boyanov, The Tinusaur Team. All Rights Reserved.
- * Distributed as open source software under MIT License, see LICENSE.txt file.
- * Retain in your source code the link http://tinusaur.org to the Tinusaur project.
- *
- * Source code available at: https://bitbucket.org/tinusaur/tinyavrlib
- *
+ * ----------------------------------------------------------------------------
+ *  Copyright (c) 2024 Tinusaur (https://tinusaur.com). All rights reserved.
+ *  Distributed as open source under the MIT License (see the LICENSE.txt file)
+ *  Please, retain in your work a link to the Tinusaur project website.
+ * ----------------------------------------------------------------------------
+ * Source code available at: https://gitlab.com/tinusaur/tinyavrlib
  */
 
 // ============================================================================
@@ -28,7 +25,7 @@
 void adcx_init(void) {
 	// ---- Initialize ADC ----
 	ADMUX =
-	    (0 << REFS2) | (0 << REFS1) | (0 << REFS0) |	// TODO: Use ADCX_REFSEL here.
+	    (0 << REFS2) | (0 << REFS1) | (0 << REFS0) |	// Set to VCC (DEFAULT)
 	    (0 << ADLAR);	// Set/Clear left shift result	(by default it is 0)
 	ADCSRA =
 	    (1 << ADEN) |	// Enable ADC
@@ -43,18 +40,6 @@ void adcx_init(void) {
 	ADCSRB =
 	    (0 << ADTS2) | (0 << ADTS1) | (0 << ADTS0);	// Set mode, 000 = free running mode
 }
-
-// TODO: Replace with the macros ADCX_ADCSEL.
-// void adcx_select(uint8_t mask) {
-//	ADMUX = (ADMUX & 0b11110000) | mask;
-// }
-// Done.
-
-// TODO: Replace use with the ADCX_START() macros.
-// void adcx_start(void) {
-//	ADCSRA |= (1 << ADSC);	// Set start conversions
-// }
-// Done.
 
 // TODO: Implement "stop" function or macros.
 

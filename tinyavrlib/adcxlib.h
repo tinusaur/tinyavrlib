@@ -1,16 +1,13 @@
 /**
- * ADCxLib - Simple library to work with ADC
- *
+ * TinyAVRLib/ADCxLib - Library to work with the ADC inputs
  * @author Neven Boyanov
- *
  * This is part of the Tinusaur/TinyAVRLib project.
- *
- * Copyright (c) 2017 Neven Boyanov, The Tinusaur Team. All Rights Reserved.
- * Distributed as open source software under MIT License, see LICENSE.txt file.
- * Retain in your source code the link http://tinusaur.org to the Tinusaur project.
- *
- * Source code available at: https://bitbucket.org/tinusaur/tinyavrlib
- *
+ * ----------------------------------------------------------------------------
+ *  Copyright (c) 2024 Tinusaur (https://tinusaur.com). All rights reserved.
+ *  Distributed as open source under the MIT License (see the LICENSE.txt file)
+ *  Please, retain in your work a link to the Tinusaur project website.
+ * ----------------------------------------------------------------------------
+ * Source code available at: https://gitlab.com/tinusaur/tinyavrlib
  */
 
 // ============================================================================
@@ -58,8 +55,6 @@
 // ----------------------------------------------------------------------------
 
 void adcx_init(void);
-// void adcx_select(uint8_t mask);	// TODO: Replace use with ADCX_ADCSEL() // Done.
-// void adcx_start(void);	// TODO: Replace use with ADCX_START() // Done.
 uint16_t adcx_read(void);
 
 // ----------------------------------------------------------------------------
