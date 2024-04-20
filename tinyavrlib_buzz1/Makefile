@@ -2,7 +2,7 @@
 # Makefile
 #
 # -----------------------------------------------------------------------------
-# Copyright (c) 2022 Tinusaur (https://tinusaur.com). All rights reserved.
+# Copyright (c) 2024 Tinusaur (https://tinusaur.com). All rights reserved.
 # Distributed as open source under the MIT License (see the LICENSE.txt file).
 # Please, retain in your work a link to the Tinusaur project website.
 # -----------------------------------------------------------------------------
@@ -490,10 +490,12 @@ extcoff: $(TARGET).elf
 
 
 # Create final output files (.hex, .eep) from ELF output file.
+# Also, create a copy of the .hx file as .bthex for use with Blocktinu uploader.
 %.hex: %.elf
 	@echo
 	@echo $(MSG_FLASH) $@
 	$(OBJCOPY) -O $(FORMAT) -R .eeprom -R .fuse -R .lock $< $@
+#	$(COPY) $(TARGET).hex $(TARGET).bthex
 
 %.eep: %.elf
 	@echo

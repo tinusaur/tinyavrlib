@@ -3,12 +3,14 @@
  * @author Neven Boyanov
  * This is part of the Tinusaur/TinyAVRLib project.
  * ----------------------------------------------------------------------------
- *  Copyright (c) 2021 Tinusaur (https://tinusaur.com). All rights reserved.
+ *  Copyright (c) 2024 Tinusaur (https://tinusaur.com). All rights reserved.
  *  Distributed as open source under the MIT License (see the LICENSE.txt file)
  *  Please, retain in your work a link to the Tinusaur project website.
  * ----------------------------------------------------------------------------
  * Source code available at: https://gitlab.com/tinusaur/tinyavrlib
  */
+
+// ============================================================================
 
 #include <stdint.h>
 #include <avr/io.h>

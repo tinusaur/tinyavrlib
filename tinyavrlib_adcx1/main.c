@@ -2,11 +2,11 @@
  * TinyAVRLib/ADCxLib - Testing scripts
  * @author Neven Boyanov
  * This is part of the Tinusaur/TinyAVRLib project.
- *
- * Copyright (c) 2018 Neven Boyanov, The Tinusaur Team. All Rights Reserved.
- * Distributed as open source software under MIT License, see LICENSE.txt file.
- * Retain in your source code the link http://tinusaur.org to the Tinusaur project.
- *
+ * ----------------------------------------------------------------------------
+ *  Copyright (c) 2024 Tinusaur (https://tinusaur.com). All rights reserved.
+ *  Distributed as open source under the MIT License (see the LICENSE.txt file)
+ *  Please, retain in your work a link to the Tinusaur project website.
+ * ----------------------------------------------------------------------------
  * Source code available at: https://gitlab.com/tinusaur/tinyavrlib
  */
 
