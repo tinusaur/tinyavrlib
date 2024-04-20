@@ -21,15 +21,18 @@
 #include "adcxlib.h"
 
 // ----------------------------------------------------------------------------
-
+// DEFAULTS:
+//	Voltage Reference:	VCC
+//	Result Alignment:	Right
+//	Mode:				Free-running
 void adcx_init(void) {
 	// ---- Initialize ADC ----
 	ADMUX =
-	    (1 << REFS2) | (1 << REFS1) | (0 << REFS0) |	// TODO: Use ADCX_REFSEL here.
-	    (0 << ADLAR);	// Set/Clear left shift result
+	    (0 << REFS2) | (0 << REFS1) | (0 << REFS0) |	// TODO: Use ADCX_REFSEL here.
+	    (0 << ADLAR);	// Set/Clear left shift result	(by default it is 0)
 	ADCSRA =
 	    (1 << ADEN) |	// Enable ADC
-	    (0 << ADEN) |	// ADC Start Conversion (not starter at init)
+	    (0 << ADEN) |	// ADC Start Conversion (0 - should not start at init)
 	    (1 << ADATE) |	// Enable auto trigger enable (Q: Is it used in free running mode?)
 		// (1 << ADIE) |	// Enable ADC interrupt
 	    // Setup ADC Prescaler
@@ -63,6 +66,8 @@ uint16_t adcx_read(void) {
 			uint8_t hi;
 		};
 	} adcx_result;
+	// NOTE (from datasheet): When ADCL register is read, 
+	// the ADC Data Register is not updated until ADCH is read.
 	adcx_result.lo = ADCL;
 	adcx_result.hi = ADCH;
 	return adcx_result.data16;

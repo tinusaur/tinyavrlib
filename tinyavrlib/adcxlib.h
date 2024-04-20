@@ -58,8 +58,8 @@
 // ----------------------------------------------------------------------------
 
 void adcx_init(void);
-// void adcx_select(uint8_t mask);	// TODO: Replace use with ADCX_ADCSEL()
-// void adcx_start(void);	// TODO: Replace use with ADCX_START()
+// void adcx_select(uint8_t mask);	// TODO: Replace use with ADCX_ADCSEL() // Done.
+// void adcx_start(void);	// TODO: Replace use with ADCX_START() // Done.
 uint16_t adcx_read(void);
 
 // ----------------------------------------------------------------------------
