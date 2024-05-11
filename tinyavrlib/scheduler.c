@@ -24,8 +24,8 @@ static scheduler_userproc __scheduler_userprocs[4];
 static uint8_t __scheduler_counters[4];
 static uint8_t __scheduler_countdowns[4];
 
-static uint8_t __scheduler_tccr0b = SCHEDULER_TCCR0B;
-static uint8_t __scheduler_ocr0a = SCHEDULER_OCR0A;
+static uint8_t __scheduler_tccr0b = SCHEDULER_TCCR0B_DEFAULT;
+static uint8_t __scheduler_ocr0a = SCHEDULER_OCR0A_DEFAULT;
 
 void scheduler_init() {
 	// Setup the Timer

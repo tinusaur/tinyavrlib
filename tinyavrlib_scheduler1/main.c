@@ -41,8 +41,8 @@ void scheduler_task(void) {
 int main(void) {
 	// ---- Init ----
 	scheduler_init();
-	scheduler_usertask(scheduler_task, 0);
 	scheduler_reinit(SCHEDULER_TCCR0B_1024, SCHEDULER_OCR0A_MAX);
+	scheduler_usertask(scheduler_task, 0);
 	// TCCR0B_1024 OCR0A_MAX Count=0 ==> period=262ms freq=3.81Hz (CPU:1MHz)
 	// TCCR0B_1024 OCR0A_DEF Count=0 ==> period=100ms freq=10Hz   (CPU:1MHz)
 	// TCCR0B_1024 OCR0A_MIN Count=0 ==> period=1ms   freq=976Hz (CPU:1MHz)

@@ -32,7 +32,6 @@
 //		1    0    1    clk I/O / 1024 (From prescaler)
 //		1    1    0    External clock source on T0 pin. Clock on falling edge.
 //		1    1    1    External clock source on T0 pin. Clock on rising edge.
-
 #define SCHEDULER_TCCR0B_0000	(0 << CS02) | (0 << CS01) | (0 << CS00)	// No clock source (Timer/Counter stopped)
 #define SCHEDULER_TCCR0B_0001	(0 << CS02) | (0 << CS01) | (1 << CS00)	// 1 / 1 - No prescaling
 #define SCHEDULER_TCCR0B_0008	(0 << CS02) | (1 << CS01) | (0 << CS00)	// 1 / 8
@@ -41,24 +40,23 @@
 #define SCHEDULER_TCCR0B_1024	(1 << CS02) | (0 << CS01) | (1 << CS00)	// 1 / 1024
 #define SCHEDULER_TCCR0B_XT0F	(1 << CS02) | (1 << CS01) | (0 << CS00)	// External clock source on T0 pin. Clock on falling edge.
 #define SCHEDULER_TCCR0B_XT0R	(1 << CS02) | (1 << CS01) | (1 << CS00)	// External clock source on T0 pin. Clock on rising edge.
+#define SCHEDULER_TCCR0B_DEFAULT	SCHEDULER_TCCR0B_0008
 
+//		Timer Counter Register
 #define SCHEDULER_OCR0A_MIN			0	// Absolute minimum, roughly 1.024 ms ticks (976 Hz) at 1024 pre-scale. (1 MHz CPU)
-#define SCHEDULER_OCR0A_DEFAULT		98	// Default, gives roughly 100.35 ms ticks (9.96 Hz) at 1024 pre-scale. (1 MHz CPU)
+#define SCHEDULER_OCR0A_DEFAULT		124	// Default, gives roughly exactly 1.000 ms ticks (1000.00 Hz) at 8 pre-scale. (1 MHz CPU)
 #define SCHEDULER_OCR0A_MAX			255	// Absolute maximum, roughly 262 ms ticks (3.81 Hz) at 1024 pre-scale. (1 MHz CPU)
 
 // PERIOD_us = (PRESCALER * (COUNTER + 1)) / FREQ_CPU_hz
 // FREQ_hz   = FREQ_CPU_hz / (PRESCALER * (COUNTER + 1))
-// Useful TCCR0B/OCR0A combinations: 8/124 ==> 1.0ms (more precise)
-
-#define SCHEDULER_TCCR0B			SCHEDULER_TCCR0B_1024
-#define SCHEDULER_OCR0A				SCHEDULER_OCR0A_DEFAULT
+// Useful TCCR0B/OCR0A combination: 8/124 ==> 1.000 ms --> THIS IS THE DEFAULT SETTINGS for scheduler_init();
 
 // ----------------------------------------------------------------------------
 
 // typedef struct {
 //	uint32_t tick;
 // } scheduler_status;
-// NOTE: This structure may be extended in the future.
+// NOTE: This structure might be extended in the future.
 // NOTE: Not used at the moment.
 // TODO: Remove the use of scheduler_status.
 // typedef scheduler_status * scheduler_status_p;

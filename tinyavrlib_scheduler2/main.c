@@ -57,11 +57,11 @@ void scheduler_task3(void) {
 int main(void) {
 	// ---- Init ----
 	scheduler_init();
+	scheduler_reinit(SCHEDULER_TCCR0B_1024, SCHEDULER_OCR0A_MAX);
 	scheduler_usertask(scheduler_task0, 0);
 	scheduler_usertask(scheduler_task1, 1);
 	scheduler_usertask(scheduler_task2, 2);
 	scheduler_usertask(scheduler_task3, 3);
-	scheduler_reinit(SCHEDULER_TCCR0B_1024, SCHEDULER_OCR0A_MAX);
 	
 	// Setup LEDs, DDRB - Data Direction Register, Port B
 	DDRB |= (1 << LED0_PORT); // Set port as LED output
