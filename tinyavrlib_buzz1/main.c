@@ -29,43 +29,38 @@
 //                 Tinusaur
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+#define TESTING_DELAY 2000
+
 int main(void) {
 	// ---- Init ----
 	buzzlib_init();
 
 	// ---- Main Loop ----
 	for (;;) { // The infinite main loop
-		/*
-		buzzlib_tone(255, 255);
-		_delay_ms(100);
-		buzzlib_tone(128, 255);
-		_delay_ms(100);
-		buzzlib_tone(64, 255);
-		_delay_ms(100);
-		buzzlib_tone(1, 255);
-		_delay_ms(100);
-		*/
-
 		buzzlib_fx(224, 4, 40, 1, 6);
-		_delay_ms(2000);
+		_delay_ms(TESTING_DELAY);
 
+		BUZZLIB_BEEP0();
+		_delay_ms(TESTING_DELAY);
 		BUZZLIB_BEEP1();
-		_delay_ms(2000);
+		_delay_ms(TESTING_DELAY);
 		BUZZLIB_BEEP2();
-		_delay_ms(2000);
+		_delay_ms(TESTING_DELAY);
 		BUZZLIB_BEEP3();
-		_delay_ms(2000);
+		_delay_ms(TESTING_DELAY);
 		BUZZLIB_ALARM();
-		_delay_ms(2000);
+		_delay_ms(TESTING_DELAY);
 		BUZZLIB_SIREN();
-		_delay_ms(2000);
+		_delay_ms(TESTING_DELAY);
 		BUZZLIB_CREAK();
-		_delay_ms(2000);
+		_delay_ms(TESTING_DELAY);
 		BUZZLIB_PHONE();
-		_delay_ms(2000);
+		_delay_ms(TESTING_DELAY);
+		BUZZLIB_ZAP();
+		_delay_ms(TESTING_DELAY);
 	}
 
-	return 0; // Return the mandatory for the "main" function int value - "0" for success.
+	return 0; // Return the mandatory result value.
 }
 
 // ============================================================================

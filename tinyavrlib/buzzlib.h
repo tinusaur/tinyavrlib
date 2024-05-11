@@ -3,7 +3,7 @@
  * @author Neven Boyanov
  * This is part of the Tinusaur/TinyAVRLib project.
  * ----------------------------------------------------------------------------
- *  Copyright (c) 2021 Tinusaur (https://tinusaur.com). All rights reserved.
+ *  Copyright (c) 2024 Tinusaur (https://tinusaur.com). All rights reserved.
  *  Distributed as open source under the MIT License (see the LICENSE.txt file)
  *  Please, retain in your work a link to the Tinusaur project website.
  * ----------------------------------------------------------------------------
@@ -24,15 +24,16 @@
 #define BUZZLIB_BUZZER_PORT	PB4	// Define the BUZZER I/O port
 
 // ----------------------------------------------------------------------------
-
-#define BUZZLIB_BEEP0()	buzzlib_fx(16, 1, 1, 0, 0)
-#define BUZZLIB_BEEP1()	buzzlib_fx(16, 32, 1, 0, 0)
-#define BUZZLIB_BEEP2()	buzzlib_fx(16, 32, 2, 20, 0)
-#define BUZZLIB_BEEP3()	buzzlib_fx(16, 32, 3, 20, 0)
-#define BUZZLIB_ALARM()	buzzlib_fx(48, 1, 60, 3, 0)
-#define BUZZLIB_SIREN()	buzzlib_fx(144, 2, 60, 0, 1)
-#define BUZZLIB_CREAK()	buzzlib_fx(64, 1, 20, 0, 5)
-#define BUZZLIB_PHONE()	buzzlib_fx(32, 6, 30, 8, 0)
+//   -> Parameters: Period, Length, Repeats, Pause, Div
+#define BUZZLIB_BEEP0()	buzzlib_fx(12, 1, 1, 0, 0)
+#define BUZZLIB_BEEP1()	buzzlib_fx(24, 16, 1, 0, 0)
+#define BUZZLIB_BEEP2()	buzzlib_fx(24, 16, 2, 20, 0)
+#define BUZZLIB_BEEP3()	buzzlib_fx(24, 16, 3, 20, 0)
+#define BUZZLIB_ALARM()	buzzlib_fx(32, 1, 32, 4, 0)
+#define BUZZLIB_SIREN()	buzzlib_fx(48, 4, 24, 0, 1)
+#define BUZZLIB_CREAK()	buzzlib_fx(96, 1, 32, 0, 6)
+#define BUZZLIB_PHONE()	buzzlib_fx(48, 6, 24, 8, 0)
+#define BUZZLIB_ZAP()	buzzlib_fx(2, 2, 12, 1, -6)
 
 // ----------------------------------------------------------------------------
 
