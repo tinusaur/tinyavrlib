@@ -57,7 +57,7 @@
 
 // ----------------------------------------------------------------------------
 
-#define K3_BUILD
+#define K1_BUILD
 
 int main(void) {
 
@@ -142,8 +142,7 @@ int main(void) {
 		// (1) Waiting for a signal from another device - that will switch LEDs.
 		// NOTE: The counter is used for the LED switching patterns.
 		COMS_MSBY(); // Mode: Stand-by
-		while (!COMS_CHK()); // Wait for start of signal
-		while (COMS_CHK()); // Wait for end of signal
+		COMS_LSN(); // Listen for input signal. NOTE: This is a blocking operation.
 		PORTB |= (1 << LED1_PORT);	// LED on.
 		_delay_ms(100);
 		PORTB &= ~(1 << LED1_PORT);	// LED off.

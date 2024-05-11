@@ -43,6 +43,7 @@
 #define COMS__HI() { PORTB |= (1 << COMS_PIN); }	// Output: High, set port to high. (not for direct use)
 #define COMS__DLY()	_delay_ms(5) // Standard signal length delay. (not for direct use)
 #define COMS_CHK() (!(PINB & (1 << COMS_PIN)))	// Check pin port active level "0".
+#define COMS_LSN() { while (!COMS_CHK()); while (COMS_CHK()); }	// Listen for input signal. NOTE: This is a blocking operation.
 
 // Sending a signal: Set COM as output; Send 0 out; Delay; Send 1 out; Delay; (immediately) Go back to stand-by mode.
 #define COMS_SIG() { COMS__MOUT(); COMS__LO(); COMS__DLY(); COMS__HI(); COMS__DLY(); COMS_MSBY(); }	// Send a signal out.
