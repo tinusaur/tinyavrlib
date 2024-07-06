@@ -20,15 +20,16 @@
 #include <stdint.h>
 
 // ---- Bx3Lib: Initialization ---------------------------------------------------
-
 // Initialization sequence: (note: some lines might be optional - if already done)
-//  adcx_init();                                                            (is necessary)
-//  ADCX_ADCSEL(ADCX_SELECT_MASK_ADC3); // Select ADC input port.           (is necessary)
-//  ADCX_REFSEL(ADCX_REFSEL_MASK_VCC);  // Select reference voltage.        (is necessary)
-//  ADCX_START(); // Start ADC conversion.                                  (is necessary)
-//  _delay_ms(4); // Small delay may be necessary for correct first ADC.    (is necessary)
+//  adcx_init();                                                        	(if necessary)
+//  ADCX_ADCSEL(ADCX_SELECT_MASK_ADC3); // Select ADC input port.       	(if necessary)
+//  ADCX_REFSEL(ADCX_REFSEL_MASK_VCC);  // Select reference voltage.    	(if necessary)
+//  ADCX_START(); // Start ADC conversion.                              	(if necessary)
+//  _delay_ms(4); // Small delay may be necessary for correct first ADC.	(if necessary)
 
 // ---- Bx3Lib: bx3_click --------------------------------------------------
+// NOTE: BLOCKING - Waits until a button(s) is(are) pressed AND released.
+// RETURN: 3 bits for each of the 3 buttons.
 
 uint8_t bx3_click(void) {
 	uint8_t buttons;

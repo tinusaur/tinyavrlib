@@ -59,7 +59,7 @@ int main(void) {
 	adcx_init();
 	ADCX_ADCSEL(ADCX_SELECT_MASK_ADC3);
 	ADCX_START();
-	_delay_ms(4); // Small delay may be necessary for correct first ADC.
+	_delay_ms(ADCX_CHANGE_DELAY); // Small delay may be necessary for correct first ADC.
 
 	// ---- Main Loop ----
 	leds_set(0);	// All LEDs off.
