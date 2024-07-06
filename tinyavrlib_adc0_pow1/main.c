@@ -11,7 +11,7 @@
  */
 
 // ============================================================================
-// NOTE: About F_CPU - it should be set either (1) in Makefile; or (2) in the IDE.
+// NOTE: About F_CPU - it should be set in either (1) Makefile; or (2) the IDE.
 
 #include <stdlib.h>
 #include <stdint.h>

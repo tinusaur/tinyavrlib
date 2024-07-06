@@ -495,7 +495,7 @@ extcoff: $(TARGET).elf
 	@echo
 	@echo $(MSG_FLASH) $@
 	$(OBJCOPY) -O $(FORMAT) -R .eeprom -R .fuse -R .lock $< $@
-	$(COPY) $(TARGET).hex $(TARGET).bthex
+#	$(COPY) $(TARGET).hex $(TARGET).bthex
 
 %.eep: %.elf
 	@echo
