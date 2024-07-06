@@ -51,7 +51,7 @@
 #define LED1_PORT	PB0	// Define the LED port
 #define LED2_PORT	PB1	// Define the LED port
 #define LED3_PORT	PB2	// Define the LED port
-#define SENS_PORT	PB2	// Define the SENS port
+#define SENS_PORT	PB2	// Define the SENS port (Photoresistor)
 #define EXT_PORT	PB4	// Define the EXT port
 #define BUZ_PORT	PB4	// Define the BUZ port
 
@@ -62,22 +62,23 @@
 int main(void) {
 
 	// ---- Initialization ----
-	// Setup common ports.
-	COMS_MSBY();
 
 #ifdef K1_BUILD
+	COMS_MSBY(); // Mode: Stand-by
 	DDRB |= (1 << LED1_PORT);	// LED port as output
-	DDRB &= ~(1 << SENS_PORT);	// Set the port as input
-	PORTB |= (1 << SENS_PORT);	// Set pull-up
+	DDRB &= ~(1 << SENS_PORT);	// Set SENS port as input
+	PORTB |= (1 << SENS_PORT);	// Set SENS pull-up
 	buzzlib_init();
 #endif
 #ifdef K2_BUILD
+	COMS_MSBY(); // Mode: Stand-by
 	DDRB |= (1 << LED1_PORT);	// LED port as output
 	DDRB |= (1 << LED2_PORT);	// LED port as output
-	DDRB &= ~(1 << EXT_PORT);	// Set the port as input
-	PORTB |= (1 << EXT_PORT);	// Set pull-up
+	DDRB &= ~(1 << EXT_PORT);	// Set EXT port as input
+	PORTB |= (1 << EXT_PORT);	// Set EXT pull-up
 #endif
 #ifdef K3_BUILD
+	COMS_MSBY(); // Mode: Stand-by
 	DDRB |= (1 << LED1_PORT);	// LED port as output
 	DDRB |= (1 << LED2_PORT);	// LED port as output
 	DDRB |= (1 << LED3_PORT);	// LED port as output
@@ -89,8 +90,8 @@ int main(void) {
 // SPLIT for K1, K2 and K3
 #ifdef K1_BUILD
 		// ---- K1 ----
-		// (1) Sending a sequence of 5 signals (using counter) to the other two devices.
-		//     If counter is decreased, will send more signals.
+		// (1) Sending a sequence of 5 signals (using the count counter) to the other two devices.
+		// NOTE: If counter is decreased (by incoming signal), will send more signals.
 		if (count < 5) {
 			BUZZLIB_BEEP0();
 			COMS_SIG();	// Send a signal out.
@@ -98,8 +99,7 @@ int main(void) {
 			count++;
 		} else {
 			// (2) Waiting for a signal from another device - that will decrease the counter by 2.
-			//     If there's a sensor event, will send 1 signal out.
-			COMS_MSBY(); // Mode: Stand-by
+			//     While waiting, If there's a sensor event, will send 1 signal out.
 			while (!COMS_CHK()) { // Wait for start of signal
 				// Also, Check SENS port
 				if (!(PINB & (1 << SENS_PORT))) {
@@ -116,12 +116,13 @@ int main(void) {
 #endif
 #ifdef K2_BUILD
 		// ---- K2 ----
-		// (1) Waiting for a signal from another device - that will switch LEDs.
+		// (1) Waiting for a signal from another device
+		//     This will switch LEDs.
 		//     If there is an event on the EXT port, will send 1 signal out.
-		// NOTE: The counter is used for the LED switching patterns.
-		COMS_MSBY(); // Mode: Stand-by
+		// NOTE: The count counter is used only for the LED switching patterns.
 		while (!COMS_CHK()) { // Wait for start of signal
-			// Also, Check EXT port
+			// While waiting, Also check EXT port.
+			// If there's a EXT port event, will send 1 signal out.
 			if (!(PINB & (1 << EXT_PORT))) {
 				_delay_ms(1000);
 				COMS_SIG();	// Send a signal out.
@@ -140,8 +141,7 @@ int main(void) {
 #ifdef K3_BUILD
 		// ---- K3 ----
 		// (1) Waiting for a signal from another device - that will switch LEDs.
-		// NOTE: The counter is used for the LED switching patterns.
-		COMS_MSBY(); // Mode: Stand-by
+		// NOTE: The count counter is used only for the LED switching patterns.
 		COMS_LSN(); // Listen for input signal. NOTE: This is a blocking operation.
 		PORTB |= (1 << LED1_PORT);	// LED on.
 		_delay_ms(100);
